@@ -111,14 +111,15 @@ export default function PharmacyNetworkSection() {
         </motion.div>
 
         {/* Stats cards */}
-        <Grid container spacing={3} sx={{ mb: 6 }}>
+        <Grid container spacing={3} sx={{ mb: 6 }} alignItems="stretch">
           {pharmacyStats.map((stat, index) => (
-            <Grid key={stat.label} size={{ xs: 6, md: 3 }}>
+            <Grid key={stat.label} size={{ xs: 6, md: 3 }} sx={{ display: 'flex' }}>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                style={{ height: '100%', width: '100%' }}
               >
                 <Paper
                   elevation={0}
@@ -129,6 +130,10 @@ export default function PharmacyNetworkSection() {
                     borderColor: 'grey.100',
                     textAlign: 'center',
                     height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                     transition: 'all 0.3s ease',
                     '&:hover': {
                       borderColor: stat.color,
@@ -173,6 +178,7 @@ export default function PharmacyNetworkSection() {
                       fontWeight: 600,
                       mb: 0.5,
                       fontSize: { xs: '0.9rem', md: '1.1rem' },
+                      lineHeight: 1.2,
                     }}
                   >
                     {stat.label}
@@ -183,6 +189,8 @@ export default function PharmacyNetworkSection() {
                     sx={{
                       color: 'text.secondary',
                       display: { xs: 'none', sm: 'block' },
+                      lineHeight: 1.6,
+                      minHeight: { sm: 44, md: 48 },
                     }}
                   >
                     {stat.description}

@@ -231,9 +231,6 @@ export default function Footer() {
           <Typography variant="body2" sx={{ opacity: 0.7 }}>
             © 2026 ЭрайФарм. Все права защищены.
           </Typography>
-          <Typography variant="body2" sx={{ opacity: 0.7 }}>
-            Разработано с ❤️ в Кыргызстане
-          </Typography>
         </Box>
       </Container>
     </Box>
