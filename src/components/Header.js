@@ -38,7 +38,6 @@ export default function Header() {
   const pathname = usePathname();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   // Handle hydration
   useEffect(() => {
@@ -105,7 +104,7 @@ export default function Header() {
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
         <Image
-          src={`${basePath}/logo.png`}
+          src="/logo.png"
           alt="ЭрайФарм"
           width={120}
           height={48}
@@ -198,7 +197,7 @@ export default function Header() {
                 transition={{ type: 'spring', stiffness: 400 }}
               >
                 <Image
-                  src={`${basePath}/logo.png`}
+                  src="/logo.png"
                   alt="ЭрайФарм"
                   width={140}
                   height={56}
