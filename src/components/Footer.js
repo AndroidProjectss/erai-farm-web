@@ -33,6 +33,7 @@ const socialLinks = [
 
 export default function Footer() {
   const theme = useTheme();
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
   return (
     <Box
@@ -85,7 +86,7 @@ export default function Footer() {
               <Box sx={{ mb: 3 }}>
                 <Box
                   component="img"
-                  src="/logo.png"
+                  src={`${basePath}/logo.png`}
                   alt="ЭрайФарм"
                   sx={{
                     width: { xs: 130, sm: 160 },
