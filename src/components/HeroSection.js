@@ -2,13 +2,11 @@
 import { Box, Typography, Container, Button, Chip, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
 
-const partners = ['KRKA', 'Sanofi', 'Takeda', 'Nobel', 'STADA', '+70'];
+const partners = ['Биннофарм', 'Ремеди Групп', 'Синтез', 'KRKA', 'STADA', '+70'];
 
 export default function HeroSection() {
   return (
@@ -142,8 +140,8 @@ export default function HeroSection() {
                   fontSize: { xs: '1.05rem', sm: '1.15rem', md: '1.5rem' },
                 }}
               >
-                Лидер фармацевтической дистрибуции в Кыргызстане с 1999 года. 
-                78 прямых контрактов с ведущими мировыми производителями.
+                Один из лидеров фармацевтической дистрибуции в Кыргызстане с 1999 года.
+                Прямые контракты с ведущими мировыми производителями.
               </Typography>
 
               {/* CTA Buttons */}
@@ -233,73 +231,12 @@ export default function HeroSection() {
               maxWidth: { xs: '100%', lg: 500 },
             }}
           >
-            {/* Main stat card */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Paper
-                elevation={0}
-                sx={{
-                  p: { xs: 3, md: 4 },
-                  borderRadius: 4,
-                  background: 'rgba(255,255,255,0.08)',
-                  backdropFilter: 'blur(20px)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                }}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
-                  <Box
-                    sx={{
-                      width: 50,
-                      height: 50,
-                      borderRadius: 2,
-                      backgroundColor: 'rgba(4, 116, 44, 0.2)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <TrendingUpIcon sx={{ color: '#0a8a38', fontSize: 28 }} />
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
-                      Объём продаж 2024
-                    </Typography>
-                    <Typography
-                      variant="h3"
-                      sx={{ color: 'white', fontWeight: 700, fontSize: { xs: '2rem', sm: '2.5rem' } }}
-                    >
-                      $44.2M
-                    </Typography>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: 0.5,
-                    backgroundColor: 'rgba(4, 116, 44, 0.2)',
-                    px: 2,
-                    py: 0.5,
-                    borderRadius: 2,
-                  }}
-                >
-                  <TrendingUpIcon sx={{ color: '#0a8a38', fontSize: 16 }} />
-                  <Typography variant="body2" sx={{ color: '#0a8a38', fontWeight: 600 }}>
-                    +37% год к году
-                  </Typography>
-                </Box>
-              </Paper>
-            </motion.div>
-
             {/* Stats row */}
             <Box
               sx={{
                 display: 'grid',
                 gap: { xs: 2, md: 3 },
-                gridTemplateColumns: { xs: 'repeat(2, minmax(0, 1fr))', sm: 'repeat(3, minmax(0, 1fr))' },
+                gridTemplateColumns: { xs: 'repeat(2, minmax(0, 1fr))', sm: 'repeat(2, minmax(0, 1fr))' },
               }}
             >
               <motion.div
@@ -348,31 +285,6 @@ export default function HeroSection() {
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
                     Аптек в сети
-                  </Typography>
-                </Paper>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                style={{ height: '100%', gridColumn: { xs: '1 / -1', sm: 'auto' } }}
-              >
-                <Paper
-                  elevation={0}
-                  sx={{
-                    p: { xs: 2.5, md: 3 },
-                    borderRadius: 3,
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    textAlign: 'center',
-                  }}
-                >
-                  <Typography variant="h4" sx={{ color: 'white', fontWeight: 700, mb: 0.5 }}>
-                    100%
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
-                    Покрытие КР
                   </Typography>
                 </Paper>
               </motion.div>

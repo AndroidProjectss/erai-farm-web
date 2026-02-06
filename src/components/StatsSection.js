@@ -3,7 +3,6 @@ import { Box, Typography, Container, Grid, Paper } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -16,14 +15,6 @@ const stats = [
     label: 'лет на рынке фармдистрибьюции',
     suffix: '',
     color: 'primary',
-          background: 'radial-gradient(circle, rgba(22, 52, 138, 0.05) 0%, transparent 70%)',
-  {
-    icon: LocalShippingIcon,
-    value: '60000',
-    label: 'Точек доставки на территории Кыргызстана',
-    suffix: '+',
-    color: 'secondary',
-    note: '(примерно)',
   },
   {
     icon: WarehouseIcon,

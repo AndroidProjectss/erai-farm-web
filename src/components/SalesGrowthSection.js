@@ -101,8 +101,7 @@ export default function SalesGrowthSection() {
                 mx: 'auto',
               }}
             >
-              Стабильный рост продаж в миллионах долларов США — 
-              результат стратегического развития и доверия партнёров
+              Стабильный рост продаж — результат стратегического развития и доверия партнёров
             </Typography>
           </Box>
         </motion.div>
@@ -160,19 +159,6 @@ export default function SalesGrowthSection() {
                       minWidth: 60,
                     }}
                   >
-                  {/* Value label */}
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 700,
-                      color: item.isForecast ? 'secondary.main' : 'primary.main',
-                      mb: 1,
-                      fontSize: { xs: '0.8rem', sm: '1rem', md: '1.25rem' },
-                    }}
-                  >
-                    ${item.value}M
-                  </Typography>
-                  
                   {/* Growth badge */}
                   {item.growth && (
                     <Box
@@ -261,7 +247,7 @@ export default function SalesGrowthSection() {
                   >
                     {item.year}
                   </Typography>
-                  {item.isForecast && (
+                  {item.isForecast && item.year !== '2025' && (
                     <Typography
                       variant="caption"
                       sx={{
@@ -280,31 +266,17 @@ export default function SalesGrowthSection() {
         </motion.div>
 
         {/* Key metrics */}
-        <Grid container spacing={3} sx={{ mt: 4 }}>
+        <Grid container spacing={3} sx={{ mt: 4, justifyContent: 'center' }}>
           {[
             {
               value: 283,
               suffix: '%',
               label: 'Рост за 5 лет',
-              description: 'с $15.8M до $44.2M',
-              color: '#16348a',
-            },
-            {
-              value: 60.5,
-              suffix: 'M',
-              label: 'Цель 2026',
-              description: 'плановый объём продаж',
-              color: '#04742c',
-            },
-            {
-              value: 37,
-              suffix: '%',
-              label: 'Рост 2024',
-              description: 'год к году',
+              description: 'по сравнению с 2021 годом',
               color: '#16348a',
             },
           ].map((metric, index) => (
-            <Grid key={metric.label} size={{ xs: 12, md: 4 }}>
+            <Grid key={metric.label} size={{ xs: 12, md: 6 }}>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

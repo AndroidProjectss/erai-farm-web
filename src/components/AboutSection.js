@@ -210,21 +210,6 @@ export default function AboutSection() {
                     Подробнее о нас
                   </Button>
                 </motion.div>
-                
-                {/* PLACEHOLDER: Кнопка скачивания презентации */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    size="large"
-                    href="#"
-                  >
-                    Скачать презентацию
-                  </Button>
-                </motion.div>
               </Box>
             </motion.div>
           </Grid>

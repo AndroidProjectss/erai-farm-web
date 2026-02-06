@@ -12,9 +12,7 @@ import {
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import DownloadIcon from '@mui/icons-material/Download';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -26,7 +24,6 @@ import CTASection from '@/components/CTASection';
 
 const stats = [
   { icon: TrendingUpIcon, value: '27', label: 'лет на рынке', suffix: '' },
-  { icon: LocalShippingIcon, value: '60 000+', label: 'точек доставки', suffix: '' },
   { icon: WarehouseIcon, value: '4 000', label: 'м² складов', suffix: '' },
   { icon: HandshakeIcon, value: '70+', label: 'контрактов', suffix: '' },
   { icon: GroupsIcon, value: '400+', label: 'сотрудников', suffix: '' },
@@ -123,26 +120,7 @@ export default function AboutPage() {
                   в Кыргызстане.
                 </Typography>
                 
-                {/* PLACEHOLDER: Кнопка скачивания презентации */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  style={{ display: 'inline-block' }}
-                >
-                  <Button
-                    variant="contained"
-                    size="large"
-                    href="#"
-                    sx={{
-                      backgroundColor: 'white',
-                      color: 'primary.main',
-                      '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' },
-                    }}
-                    startIcon={<DownloadIcon />}
-                  >
-                    Скачать презентацию
-                  </Button>
-                </motion.div>
+                {/* Кнопка скачивания презентации убрана по ТЗ */}
               </motion.div>
             </Grid>
             
@@ -182,37 +160,77 @@ export default function AboutPage() {
       {/* Статистика */}
       <Box sx={{ py: { xs: 6, md: 8 }, backgroundColor: 'grey.50' }}>
         <Container maxWidth="xl">
-          <Grid container spacing={2}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: {
+                xs: 'repeat(2, minmax(0, 1fr))',
+                sm: 'repeat(3, minmax(0, 1fr))',
+                md: 'repeat(5, minmax(0, 1fr))',
+              },
+              gap: 2,
+              alignItems: 'stretch',
+            }}
+          >
             {stats.map((stat, index) => (
-              <Grid key={stat.label} size={{ xs: 6, sm: 4, md: 2 }}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.98 }}
+                style={{ height: '100%' }}
+              >
+                <Paper
+                  elevation={0}
+                  sx={{
+                    p: 3,
+                    textAlign: 'center',
+                    borderRadius: 3,
+                    background:
+                      'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(248,250,252,1) 100%)',
+                    border: '1px solid rgba(15, 23, 42, 0.08)',
+                    boxShadow: '0 10px 30px rgba(15, 23, 42, 0.06)',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    gap: 0.5,
+                    transition: 'box-shadow 180ms ease, border-color 180ms ease',
+                    '&:hover': {
+                      boxShadow: '0 18px 50px rgba(15, 23, 42, 0.12)',
+                      borderColor: 'rgba(22, 52, 138, 0.25)',
+                    },
+                  }}
                 >
-                  <Paper
-                    elevation={0}
+                  <Box
                     sx={{
-                      p: 3,
-                      textAlign: 'center',
-                      borderRadius: 3,
-                      border: '1px solid',
-                      borderColor: 'grey.200',
+                      width: 56,
+                      height: 56,
+                      borderRadius: '50%',
+                      mx: 'auto',
+                      mb: 0.5,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: 'rgba(22, 52, 138, 0.08)',
+                      border: '1px solid rgba(22, 52, 138, 0.14)',
                     }}
                   >
-                    <stat.icon sx={{ fontSize: 32, color: 'primary.main', mb: 1 }} />
-                    <Typography variant="h4" fontWeight={700} color="primary.main">
-                      {stat.value}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {stat.label}
-                    </Typography>
-                  </Paper>
-                </motion.div>
-              </Grid>
+                    <stat.icon sx={{ fontSize: 28, color: 'primary.main' }} />
+                  </Box>
+                  <Typography variant="h4" fontWeight={700} color="primary.main">
+                    {stat.value}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {stat.label}
+                  </Typography>
+                </Paper>
+              </motion.div>
             ))}
-          </Grid>
+          </Box>
         </Container>
       </Box>
 

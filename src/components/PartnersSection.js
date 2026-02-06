@@ -1,41 +1,29 @@
 'use client';
-import { Box, Typography, Container, Paper, Chip } from '@mui/material';
+import Image from 'next/image';
+import { Box, Typography, Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 
-const partners = [
-  // Основные партнеры из презентации
-  { name: 'KRKA', country: 'Словения' },
-  { name: 'Sanofi', country: 'Франция' },
-  { name: 'Takeda', country: 'Япония' },
-  { name: 'Nobel', country: 'Турция' },
-  { name: 'STADA', country: 'Германия' },
-  { name: 'Grindex', country: 'Латвия' },
-  { name: 'Sopharma', country: 'Болгария' },
-  { name: 'Биннофарм', country: 'Россия' },
-  { name: 'Ranbaxy', country: 'Индия' },
-  { name: 'Kusum', country: 'Украина' },
-  { name: 'Микроген', country: 'Россия' },
-  { name: 'Himalaya', country: 'Индия' },
-  { name: 'Pfizer', country: 'США' },
-  { name: 'Bosnalijek', country: 'Босния' },
-  { name: 'Алкалоид', country: 'Северная Македония' },
-  { name: 'World Medicine', country: 'Великобритания' },
-  { name: 'Sun Pharma', country: 'Индия' },
-  { name: 'Glenmark', country: 'Индия' },
-  { name: 'Naturprodukt', country: 'Германия' },
-  { name: 'Биотэк', country: 'Россия' },
-  { name: 'ФармВИЛАР', country: 'Россия' },
-  { name: 'Фармак', country: 'Украина' },
-  { name: 'Arterium', country: 'Украина' },
-  { name: 'Абдифарм', country: 'Узбекистан' },
-  { name: 'Berlin-Chemie', country: 'Германия' },
-  { name: 'Gedeon Richter', country: 'Венгрия' },
-  { name: 'Egis', country: 'Венгрия' },
-  { name: 'Sandoz', country: 'Швейцария' },
+const partnerLogoFiles = [
+  'photo_1_2026-02-06_12-39-08.jpg',
+  'photo_2_2026-02-06_12-39-08.jpg',
+  'photo_3_2026-02-06_12-39-08.jpg',
+  'photo_4_2026-02-06_12-39-08.jpg',
+  'photo_5_2026-02-06_12-39-08.jpg',
+  'photo_6_2026-02-06_12-39-08.jpg',
+  'photo_7_2026-02-06_12-39-08.jpg',
+  'photo_8_2026-02-06_12-39-08.jpg',
+  'photo_9_2026-02-06_12-39-08.jpg',
+  'photo_10_2026-02-06_12-39-08.jpg',
+  'photo_11_2026-02-06_12-39-08.jpg',
+  'photo_12_2026-02-06_12-39-08.jpg',
+  'photo_13_2026-02-06_12-39-08.jpg',
+  'photo_14_2026-02-06_12-39-08.jpg',
+  'photo_15_2026-02-06_12-39-08.jpg',
+  'photo_16_2026-02-06_12-39-08.jpg',
 ];
 
-const featuredPartners = ['KRKA', 'Sanofi', 'Takeda', 'Nobel', 'STADA', 'Grindex', 'Gedeon Richter', 'Berlin-Chemie'];
+const otherPartnersLabel = '+60 других';
 
 export default function PartnersSection() {
   return (
@@ -47,12 +35,11 @@ export default function PartnersSection() {
         overflow: 'hidden',
       }}
     >
-      {/* Background pattern */}
       <Box
         sx={{
           position: 'absolute',
           inset: 0,
-          opacity: 0.05,
+          opacity: 0.06,
           backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
@@ -60,12 +47,12 @@ export default function PartnersSection() {
 
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 5, md: 7 } }}>
             <Box
               sx={{
                 display: 'inline-flex',
@@ -74,7 +61,7 @@ export default function PartnersSection() {
                 backgroundColor: 'rgba(255,255,255,0.1)',
                 px: 3,
                 py: 1,
-                borderRadius: 10,
+                borderRadius: 999,
                 mb: 3,
               }}
             >
@@ -84,211 +71,154 @@ export default function PartnersSection() {
                 sx={{
                   color: '#0a8a38',
                   letterSpacing: 3,
-                  fontWeight: 600,
+                  fontWeight: 700,
                 }}
               >
                 78 прямых контрактов
               </Typography>
             </Box>
-            
-            <Typography
-              variant="h2"
-              sx={{
-                color: 'white',
-                mb: 2,
-              }}
-            >
+
+            <Typography variant="h2" sx={{ color: 'white', mb: 2 }}>
               Наши партнёры
             </Typography>
             <Typography
               variant="body1"
               sx={{
                 color: 'rgba(255,255,255,0.8)',
-                maxWidth: 700,
+                maxWidth: 780,
                 mx: 'auto',
+                lineHeight: 1.7,
               }}
             >
-              Прямые импортные контракты с ведущими мировыми производителями 
-              лекарственных средств и медицинских изделий
+              Логотипы ключевых партнёров и производителей. Полный список включает десятки других
+              компаний.
             </Typography>
           </Box>
         </motion.div>
 
-        {/* Featured partners */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <Box
+          <Paper
+            elevation={0}
             sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 2,
-              mb: 4,
+              maxWidth: 1240,
+              mx: 'auto',
+              p: { xs: 2, sm: 2.5, md: 3 },
+              borderRadius: 4,
+              backgroundColor: 'rgba(255,255,255,0.08)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              backdropFilter: 'blur(10px)',
             }}
           >
-            {featuredPartners.map((partner, index) => (
-              <motion.div
-                key={partner}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-              >
-                <Paper
-                  elevation={0}
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                gap: 2,
+              }}
+            >
+              {partnerLogoFiles.map((file, index) => (
+                <Box
+                  key={file}
                   sx={{
-                    px: 4,
-                    py: 2,
-                    borderRadius: 3,
-                    backgroundColor: 'white',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-3px)',
-                      boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                    width: {
+                      xs: 'calc(50% - 16px)',
+                      sm: 'calc(33.333% - 16px)',
+                      md: 'calc(25% - 16px)',
+                      lg: 'calc(16.666% - 16px)',
                     },
                   }}
                 >
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 700,
-                      color: 'primary.main',
-                    }}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.25, delay: 0.05 + index * 0.03 }}
+                    style={{ height: '100%' }}
                   >
-                    {partner}
-                  </Typography>
-                </Paper>
-              </motion.div>
-            ))}
-          </Box>
-        </motion.div>
-
-        {/* All partners chips */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 1.5,
-            }}
-          >
-            {partners
-              .filter(p => !featuredPartners.includes(p.name))
-              .map((partner, index) => (
-                <motion.div
-                  key={partner.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.2, delay: 0.5 + index * 0.02 }}
-                >
-                  <Chip
-                    label={partner.name}
-                    sx={{
-                      backgroundColor: 'rgba(255,255,255,0.15)',
-                      color: 'white',
-                      borderRadius: 2,
-                      fontWeight: 500,
-                      fontSize: '0.9rem',
-                      py: 2.5,
-                      px: 1,
-                      transition: 'all 0.3s ease',
-                      '&:hover': {
-                        backgroundColor: 'rgba(255,255,255,0.25)',
-                        transform: 'scale(1.05)',
-                      },
-                    }}
-                  />
-                </motion.div>
-              ))}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.2, delay: 0.8 }}
-            >
-              <Chip
-                label="+50 других"
-                sx={{
-                  backgroundColor: '#04742c',
-                  color: 'white',
-                  borderRadius: 2,
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  py: 2.5,
-                  px: 1,
-                }}
-              />
-            </motion.div>
-          </Box>
-        </motion.div>
-
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: { xs: 3, md: 6 },
-              mt: 8,
-              pt: 6,
-              borderTop: '1px solid rgba(255,255,255,0.1)',
-            }}
-          >
-            {[
-              { value: '78', label: 'Прямых контрактов' },
-              { value: '15%', label: 'Доля рынка' },
-              { value: '5%', label: 'Госпитальный канал' },
-              { value: '3-е', label: 'Место по рейтингу ввоза' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-              >
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography
-                    variant="h2"
-                    sx={{
-                      color: '#0a8a38',
-                      fontWeight: 800,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {stat.value}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: 'rgba(255,255,255,0.7)',
-                      mt: 1,
-                      fontWeight: 500,
-                    }}
-                  >
-                    {stat.label}
-                  </Typography>
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        position: 'relative',
+                        height: { xs: 82, sm: 92, md: 102 },
+                        borderRadius: 2,
+                        backgroundColor: '#fff',
+                        border: '1px solid rgba(0,0,0,0.06)',
+                        overflow: 'hidden',
+                        transition: 'transform 160ms ease, box-shadow 160ms ease',
+                        '&:hover': {
+                          transform: 'translateY(-2px)',
+                          boxShadow: '0 14px 40px rgba(0,0,0,0.22)',
+                        },
+                      }}
+                    >
+                      <Box sx={{ position: 'absolute', inset: 0, p: { xs: 0.5, md: 1 } }}>
+                        <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
+                          <Image
+                            src={`/partners/${file}`}
+                            alt={`Логотип партнёра ${index + 1}`}
+                            fill
+                            sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, (max-width: 1200px) 25vw, 16vw"
+                            style={{ objectFit: 'contain' }}
+                            priority={index < 6}
+                          />
+                        </Box>
+                      </Box>
+                    </Paper>
+                  </motion.div>
                 </Box>
-              </motion.div>
-            ))}
-          </Box>
+              ))}
+
+              <Box
+                sx={{
+                  width: {
+                    xs: 'calc(50% - 16px)',
+                    sm: 'calc(33.333% - 16px)',
+                    md: 'calc(25% - 16px)',
+                    lg: 'calc(16.666% - 16px)',
+                  },
+                }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.25, delay: 0.05 + partnerLogoFiles.length * 0.03 }}
+                >
+                  <Paper
+                    elevation={0}
+                    sx={{
+                      height: { xs: 82, sm: 92, md: 102 },
+                      borderRadius: 3,
+                      background:
+                        'linear-gradient(135deg, rgba(4,116,44,0.96) 0%, rgba(10,138,56,0.96) 100%)',
+                      color: 'white',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      textAlign: 'center',
+                      px: 2,
+                      boxShadow: '0 14px 40px rgba(0,0,0,0.22)',
+                    }}
+                  >
+                    <Box>
+                      <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1 }}>
+                        {otherPartnersLabel}
+                      </Typography>
+                      <Typography variant="body2" sx={{ opacity: 0.9, mt: 0.5 }}>
+                        других партнёров
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </motion.div>
+              </Box>
+            </Box>
+          </Paper>
         </motion.div>
       </Container>
     </Box>

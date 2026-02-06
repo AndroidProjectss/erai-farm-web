@@ -57,6 +57,7 @@ export default function Footer() {
           borderRadius: '50%',
           background: 'rgba(4, 116, 44, 0.1)',
           filter: 'blur(60px)',
+          zIndex: 0,
         }}
       />
       <Box
@@ -69,10 +70,22 @@ export default function Footer() {
           borderRadius: '50%',
           background: 'rgba(255, 255, 255, 0.05)',
           filter: 'blur(40px)',
+          zIndex: 0,
         }}
       />
 
-      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+      {/* Затемнение фона для читаемости */}
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 100%)',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
         <Grid container spacing={{ xs: 4, md: 6 }}>
           {/* Логотип и описание */}
           <Grid size={{ xs: 12, md: 4 }}>
@@ -187,7 +200,7 @@ export default function Footer() {
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                   <EmailIcon sx={{ fontSize: 20, color: 'secondary.light' }} />
                   <Typography variant="body2" sx={{ overflowWrap: 'anywhere' }}>
-                    zakupki@erai.kg
+                    eraipharm.corp@erai.kg
                   </Typography>
                 </Box>
               </Box>

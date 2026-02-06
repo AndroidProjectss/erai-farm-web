@@ -9,6 +9,8 @@ import {
   Paper,
   TextField,
   Button,
+  Alert,
+  CircularProgress,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -16,6 +18,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SendIcon from '@mui/icons-material/Send';
+import { useMemo, useState } from 'react';
 
 const contactInfo = [
   {
@@ -27,7 +30,7 @@ const contactInfo = [
   {
     icon: EmailIcon,
     title: 'Email',
-    content: ['zakupki@erai.kg'],
+    content: ['eraipharm.corp@erai.kg'],
     color: 'secondary',
   },
   {
@@ -45,6 +48,86 @@ const contactInfo = [
 ];
 
 export default function ContactsPage() {
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
+  });
+  const [status, setStatus] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const location = useMemo(() => {
+    return {
+      lat: 42.885303,
+      lon: 74.539373,
+      addressShort: '720080, г. Бишкек, ул. Профсоюзная, дом № 63',
+    };
+  }, []);
+
+  const twoGisLink = useMemo(() => {
+    return 'https://2gis.kg/bishkek/geo/70030076268410586/74.539373%2C42.885303?m=74.539259%2C42.885506%2F17.63';
+  }, []);
+
+  const googleMapsEmbedSrc = useMemo(() => {
+    // Без ключей/ENV: обычный embed через q=lat,lon.
+    // Внешнее открытие/переходы делаем в 2ГИС.
+    return `https://www.google.com/maps?q=${location.lat},${location.lon}&z=17&output=embed`;
+  }, [location.lat, location.lon]);
+
+  const updateField = (field) => (event) => {
+    setForm((prev) => ({ ...prev, [field]: event.target.value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus(null);
+
+    const name = form.name.trim();
+    const phone = form.phone.trim();
+    const email = form.email.trim();
+    const message = form.message.trim();
+
+    if (!name) {
+      setStatus({ type: 'error', message: 'Пожалуйста, заполните поле “Имя”.' });
+      return;
+    }
+
+    if (!phone && !email) {
+      setStatus({ type: 'error', message: 'Укажите телефон или email (хотя бы одно поле).' });
+      return;
+    }
+
+    if (!message) {
+      setStatus({ type: 'error', message: 'Пожалуйста, заполните поле “Сообщение”.' });
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data?.error || 'Не удалось отправить сообщение.');
+      }
+
+      setStatus({ type: 'success', message: 'Сообщение отправлено. Спасибо!' });
+      setForm({ name: '', phone: '', email: '', message: '' });
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Ошибка отправки сообщения.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       {/* Hero секция */}
@@ -208,16 +291,14 @@ export default function ContactsPage() {
                     borderColor: 'grey.200',
                   }}
                 >
-                  {/* Google Maps - ул. Профсоюзная, дом № 63, Бишкек */}
                   <iframe
-                    src="https://www.google.com/maps?&q=%D0%91%D0%B8%D1%88%D0%BA%D0%B5%D0%BA%2C%20%D1%83%D0%BB.%20%D0%9F%D1%80%D0%BE%D1%84%D1%81%D0%BE%D1%8E%D0%B7%D0%BD%D0%B0%D1%8F%2C%2063&output=embed"
+                    src={googleMapsEmbedSrc}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
-                    allowFullScreen=""
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="ЭрайФарм - ул. Профсоюзная, 63, Бишкек"
+                    title="ЭрайФарм — ул. Профсоюзная, 63, Бишкек (Google Maps)"
                   />
                 </Paper>
                 <Typography
@@ -225,8 +306,19 @@ export default function ContactsPage() {
                   color="text.secondary"
                   sx={{ mt: 2, textAlign: 'center' }}
                 >
-                  📍 720080, г. Бишкек, ул. Профсоюзная, дом № 63
+                  📍 {location.addressShort}
                 </Typography>
+                <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
+                  <Button
+                    variant="outlined"
+                    href={twoGisLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    startIcon={<LocationOnIcon />}
+                  >
+                    Открыть в 2ГИС
+                  </Button>
+                </Box>
               </motion.div>
             </Grid>
 
@@ -254,18 +346,24 @@ export default function ContactsPage() {
                     Заполните форму, и мы свяжемся с вами в ближайшее время
                   </Typography>
 
-                  <Box component="form" noValidate>
+                  <Box component="form" noValidate onSubmit={handleSubmit}>
                     <TextField
                       fullWidth
                       label="Ваше имя"
                       variant="outlined"
                       sx={{ mb: 3 }}
+                      value={form.name}
+                      onChange={updateField('name')}
+                      required
                     />
                     <TextField
                       fullWidth
                       label="Телефон"
                       variant="outlined"
                       sx={{ mb: 3 }}
+                      value={form.phone}
+                      onChange={updateField('phone')}
+                      helperText="Укажите телефон или email (хотя бы одно поле)"
                     />
                     <TextField
                       fullWidth
@@ -273,12 +371,9 @@ export default function ContactsPage() {
                       type="email"
                       variant="outlined"
                       sx={{ mb: 3 }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Тема обращения"
-                      variant="outlined"
-                      sx={{ mb: 3 }}
+                      value={form.email}
+                      onChange={updateField('email')}
+                      helperText="Укажите телефон или email (хотя бы одно поле)"
                     />
                     <TextField
                       fullWidth
@@ -287,7 +382,17 @@ export default function ContactsPage() {
                       rows={4}
                       variant="outlined"
                       sx={{ mb: 3 }}
+                      value={form.message}
+                      onChange={updateField('message')}
+                      required
                     />
+
+                    {status?.message && (
+                      <Alert severity={status.type} sx={{ mb: 3 }}>
+                        {status.message}
+                      </Alert>
+                    )}
+
                     <motion.div
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -299,8 +404,17 @@ export default function ContactsPage() {
                         size="large"
                         endIcon={<SendIcon />}
                         sx={{ py: 1.5 }}
+                        type="submit"
+                        disabled={isSubmitting}
                       >
-                        Отправить сообщение
+                        {isSubmitting ? (
+                          <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
+                            <CircularProgress size={20} color="inherit" />
+                            Отправка...
+                          </Box>
+                        ) : (
+                          'Отправить сообщение'
+                        )}
                       </Button>
                     </motion.div>
                   </Box>
@@ -349,8 +463,9 @@ export default function ContactsPage() {
                     <Button
                       variant="contained"
                       fullWidth
-                      href="https://maps.google.com/?q=720080,Бишкек,Профсоюзная,63"
+                      href={twoGisLink}
                       target="_blank"
+                      rel="noopener noreferrer"
                       sx={{
                         backgroundColor: 'white',
                         color: 'primary.main',
@@ -359,7 +474,7 @@ export default function ContactsPage() {
                       }}
                       startIcon={<LocationOnIcon />}
                     >
-                      Открыть на карте
+                      Открыть в 2ГИС
                     </Button>
                   </Grid>
                 </Grid>

@@ -173,13 +173,13 @@ export default function Header() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.98)' : 'transparent',
+          backgroundColor: 'rgba(255, 255, 255, 0.98)',
           backgroundImage: 'none',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : 'none',
-          boxShadow: scrolled ? '0 2px 24px rgba(0,0,0,0.10)' : 'none',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(0,0,0,0.08)',
+          boxShadow: '0 2px 24px rgba(0,0,0,0.10)',
           transition: 'all 0.3s ease',
-          color: scrolled ? 'text.primary' : 'white',
+          color: 'text.primary',
         }}
       >
         <Container maxWidth="xl">
@@ -196,14 +196,30 @@ export default function Header() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
-                <Image
-                  src="/logo.png"
-                  alt="ЭрайФарм"
-                  width={140}
-                  height={56}
-                  style={{ objectFit: 'contain' }}
-                  priority
-                />
+                <Box
+                  sx={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    px: { xs: 1, sm: 1.25 },
+                    py: { xs: 0.75, sm: 0.9 },
+                    borderRadius: 2.5,
+                    backgroundColor: 'transparent',
+                    border: '1px solid transparent',
+                    backdropFilter: 'none',
+                    boxShadow: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  <Image
+                    src="/logo.png"
+                    alt="ЭрайФарм"
+                    width={140}
+                    height={56}
+                    style={{ objectFit: 'contain' }}
+                    priority
+                  />
+                </Box>
               </motion.div>
             </Link>
 
@@ -220,7 +236,7 @@ export default function Header() {
                       component={Link}
                       href={item.href}
                       sx={{
-                        color: scrolled ? 'text.primary' : 'white',
+                        color: 'text.primary',
                         fontWeight: pathname === item.href ? 600 : 500,
                         position: 'relative',
                         px: 2,
@@ -262,10 +278,10 @@ export default function Header() {
               <IconButton
                 onClick={handleDrawerToggle}
                 sx={{
-                  color: scrolled ? 'primary.main' : 'white',
-                  backgroundColor: scrolled ? 'rgba(22, 52, 138, 0.1)' : 'rgba(255, 255, 255, 0.1)',
+                  color: 'primary.main',
+                  backgroundColor: 'rgba(22, 52, 138, 0.08)',
                   '&:hover': {
-                    backgroundColor: scrolled ? 'rgba(22, 52, 138, 0.2)' : 'rgba(255, 255, 255, 0.2)',
+                    backgroundColor: 'rgba(22, 52, 138, 0.14)',
                   },
                 }}
               >

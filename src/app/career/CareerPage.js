@@ -19,7 +19,6 @@ import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import GroupsIcon from '@mui/icons-material/Groups';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
@@ -45,11 +44,6 @@ const benefits = [
     icon: GroupsIcon,
     title: 'Дружный коллектив',
     description: 'Команда профессионалов и комфортная атмосфера',
-  },
-  {
-    icon: LocalHospitalIcon,
-    title: 'Соц. пакет',
-    description: 'Медицинское обслуживание и другие бонусы',
   },
   {
     icon: WorkIcon,
@@ -178,7 +172,7 @@ export default function CareerPage() {
             </Box>
           </motion.div>
 
-          <Grid container spacing={3}>
+          <Grid container spacing={3} justifyContent="center">
             {benefits.map((benefit, index) => (
               <Grid key={benefit.title} size={{ xs: 12, sm: 6, md: 4 }}>
                 <motion.div
@@ -344,10 +338,7 @@ export default function CareerPage() {
                         Телефон HR
                       </Typography>
                       <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
-                        +996 (312) 925511
-                      </Typography>
-                      <Typography variant="caption" sx={{ opacity: 0.7, display: 'block', mt: 0.5 }}>
-                        (добавочный номер HR будет указан)
+                        +996 706 929230
                       </Typography>
                     </Paper>
                   </Grid>
@@ -366,10 +357,7 @@ export default function CareerPage() {
                         Email
                       </Typography>
                       <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
-                        hr@erai.kg
-                      </Typography>
-                      <Typography variant="caption" sx={{ opacity: 0.7, display: 'block', mt: 0.5 }}>
-                        Отправьте резюме
+                        eraifarm.hr@gmail.com
                       </Typography>
                     </Paper>
                   </Grid>

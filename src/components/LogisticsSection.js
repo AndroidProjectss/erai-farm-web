@@ -11,7 +11,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 const logisticsStats = [
   {
     icon: InventoryIcon,
-    value: '2000',
+    value: '3800',
     label: 'Паллетомест',
     color: '#16348a',
   },
@@ -19,6 +19,7 @@ const logisticsStats = [
     icon: LocalShippingIcon,
     value: '15',
     label: 'Автомобилей',
+    note: 'из них 5 — с температурным режимом',
     color: '#04742c',
   },
   {
@@ -36,10 +37,9 @@ const logisticsStats = [
 ];
 
 const warehouses = [
-  { city: 'Бишкек', type: 'Главный склад', size: '2000 паллет', isMain: true },
-  { city: 'Ош', type: 'Региональный склад', size: '400 паллет', isMain: false },
-  { city: 'Джалал-Абад', type: 'Региональный склад', size: '200 паллет', isMain: false },
-  { city: 'Иссык-Куль', type: 'Сезонный склад', size: '100 паллет', isMain: false },
+  { city: 'Бишкек', type: 'Главный склад', size: '3800 паллет', isMain: true },
+  { city: 'Манас', type: 'Региональный склад', size: '200 паллет', isMain: false },
+  { city: 'Иссык-Куль', type: 'Сезонный склад', size: '50 паллет', isMain: false },
   { city: 'Кара-Балта', type: 'Логистический пункт', size: '50 паллет', isMain: false },
 ];
 
@@ -139,6 +139,9 @@ export default function LogisticsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.98 }}
+                style={{ height: '100%' }}
               >
                 <Paper
                   elevation={0}
@@ -148,6 +151,12 @@ export default function LogisticsSection() {
                     border: '1px solid',
                     borderColor: 'grey.100',
                     textAlign: 'center',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 0.5,
                     transition: 'all 0.3s ease',
                     '&:hover': {
                       borderColor: stat.color,
@@ -174,6 +183,21 @@ export default function LogisticsSection() {
                     }}
                   >
                     {stat.label}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      display: 'block',
+                      mt: 0.5,
+                      color: 'text.secondary',
+                      minHeight: '2.2em',
+                      lineHeight: 1.1,
+                      maxWidth: 220,
+                      mx: 'auto',
+                      opacity: stat.note ? 1 : 0,
+                    }}
+                  >
+                    {stat.note || '—'}
                   </Typography>
                 </Paper>
               </motion.div>

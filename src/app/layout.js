@@ -16,6 +16,11 @@ export const metadata = {
   keywords: 'ЭрайФарм, фармацевтика, дистрибьютор, Кыргызстан, Бишкек, лекарства, медицина',
   authors: [{ name: 'ЭрайФарм' }],
   creator: 'ЭрайФарм',
+  icons: {
+    icon: '/logo-sm.png',
+    shortcut: '/logo-sm.png',
+    apple: '/logo-sm.png',
+  },
   openGraph: {
     title: 'ЭрайФарм - Фармацевтическая компания Кыргызстана',
     description: 'Один из крупнейших фармдистрибьюторов в Кыргызстане с 1999 года',

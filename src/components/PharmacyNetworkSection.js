@@ -1,5 +1,5 @@
 'use client';
-import { Box, Typography, Container, Grid, Paper, Chip, LinearProgress } from '@mui/material';
+import { Box, Typography, Container, Grid, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
 import SchoolIcon from '@mui/icons-material/School';
@@ -35,15 +35,6 @@ const pharmacyStats = [
     description: 'Планируемый рост в 2026 году',
     color: '#04742c',
   },
-];
-
-const regions = [
-  { name: 'Бишкек', count: 85, percentage: 60 },
-  { name: 'Ош', count: 25, percentage: 17 },
-  { name: 'Чуйская область', count: 15, percentage: 10 },
-  { name: 'Иссык-Куль', count: 8, percentage: 6 },
-  { name: 'Джалал-Абад', count: 7, percentage: 5 },
-  { name: 'Другие регионы', count: 5, percentage: 2 },
 ];
 
 export default function PharmacyNetworkSection() {
@@ -201,95 +192,9 @@ export default function PharmacyNetworkSection() {
           ))}
         </Grid>
 
-        {/* Regional distribution */}
-        <Grid container spacing={4}>
-          <Grid size={{ xs: 12, lg: 6 }}>
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Paper
-                elevation={0}
-                sx={{
-                  p: 4,
-                  borderRadius: 4,
-                  border: '1px solid',
-                  borderColor: 'grey.100',
-                  height: '100%',
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  sx={{
-                    color: 'primary.main',
-                    fontWeight: 700,
-                    mb: 4,
-                  }}
-                >
-                  Распределение по регионам
-                </Typography>
-
-                {regions.map((region, index) => (
-                  <motion.div
-                    key={region.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
-                  >
-                    <Box sx={{ mb: 3 }}>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                          mb: 1,
-                        }}
-                      >
-                        <Typography
-                          variant="body1"
-                          sx={{
-                            fontWeight: 600,
-                            color: 'text.primary',
-                          }}
-                        >
-                          {region.name}
-                        </Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <Chip
-                            label={`${region.count} аптек`}
-                            size="small"
-                            sx={{
-                              backgroundColor: 'primary.main',
-                              color: 'white',
-                              fontWeight: 600,
-                            }}
-                          />
-                        </Box>
-                      </Box>
-                      <LinearProgress
-                        variant="determinate"
-                        value={region.percentage}
-                        sx={{
-                          height: 8,
-                          borderRadius: 4,
-                          backgroundColor: 'grey.100',
-                          '& .MuiLinearProgress-bar': {
-                            borderRadius: 4,
-                            background: `linear-gradient(90deg, #16348a 0%, #04742c 100%)`,
-                          },
-                        }}
-                      />
-                    </Box>
-                  </motion.div>
-                ))}
-              </Paper>
-            </motion.div>
-          </Grid>
-
-          <Grid size={{ xs: 12, lg: 6 }}>
+        {/* Blue block (full width after removing regional distribution) */}
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ width: '100%', maxWidth: 1100 }}>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -378,8 +283,8 @@ export default function PharmacyNetworkSection() {
                 </Box>
               </Paper>
             </motion.div>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
