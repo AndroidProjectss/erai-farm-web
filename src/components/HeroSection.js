@@ -13,7 +13,7 @@ export default function HeroSection() {
     <Box
       sx={{
         minHeight: { xs: 'auto', md: '100vh' },
-        background: 'linear-gradient(135deg, #16348a 0%, #0d2b52 60%, #0a1f3d 100%)',
+        background: `linear-gradient(90deg, rgba(13, 43, 82, 0.95) 0%, rgba(13, 43, 82, 0.75) 45%, rgba(13, 43, 82, 0.2) 100%), url(/bg.png) center/cover no-repeat`,
         position: 'relative',
         overflow: 'hidden',
         display: 'flex',
@@ -84,12 +84,14 @@ export default function HeroSection() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 1,
-                  backgroundColor: 'rgba(4, 116, 44, 0.2)',
-                  border: '1px solid rgba(4, 116, 44, 0.3)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   borderRadius: 10,
                   px: 2.5,
                   py: 1,
                   mb: { xs: 3, md: 4 },
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                 }}
               >
                 <VerifiedIcon sx={{ color: '#0a8a38', fontSize: 18 }} />
@@ -131,13 +133,13 @@ export default function HeroSection() {
               <Typography
                 variant="h5"
                 sx={{
-                  color: 'rgba(255, 255, 255, 0.8)',
+                  color: 'rgba(255, 255, 255, 0.9)',
                   fontWeight: 400,
                   lineHeight: 1.6,
                   mb: { xs: 3, md: 4 },
                   maxWidth: 600,
                   mx: { xs: 'auto', lg: 0 },
-                  fontSize: { xs: '1.05rem', sm: '1.15rem', md: '1.5rem' },
+                  fontSize: { xs: '1.05rem', sm: '1.15rem', md: '1.25rem' },
                 }}
               >
                 Один из лидеров фармацевтической дистрибуции в Кыргызстане с 1999 года.
@@ -167,6 +169,10 @@ export default function HeroSection() {
                       py: 1.4,
                       fontSize: { xs: '1rem', sm: '1.1rem' },
                       borderRadius: 3,
+                      boxShadow: '0 8px 20px rgba(4, 116, 44, 0.3)',
+                      '&:hover': {
+                        boxShadow: '0 8px 25px rgba(4, 116, 44, 0.4)',
+                      },
                     }}
                   >
                     Связаться с нами
@@ -183,11 +189,13 @@ export default function HeroSection() {
                       py: 1.4,
                       fontSize: { xs: '1rem', sm: '1.1rem' },
                       borderRadius: 3,
-                      borderColor: 'rgba(255,255,255,0.3)',
+                      border: '1px solid rgba(255,255,255,0.3)',
                       color: 'white',
+                      background: 'rgba(255,255,255,0.05)',
+                      backdropFilter: 'blur(10px)',
                       '&:hover': {
-                        borderColor: 'white',
-                        backgroundColor: 'rgba(255,255,255,0.1)',
+                        border: '1px solid rgba(255,255,255,0.5)',
+                        background: 'rgba(255,255,255,0.1)',
                       },
                     }}
                   >
@@ -249,16 +257,18 @@ export default function HeroSection() {
                   elevation={0}
                   sx={{
                     p: { xs: 2.5, md: 3 },
-                    borderRadius: 3,
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: 4,
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    backdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
                     textAlign: 'center',
                   }}
                 >
                   <Typography variant="h4" sx={{ color: 'white', fontWeight: 700, mb: 0.5 }}>
                     15%
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
+                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
                     Доля рынка
                   </Typography>
                 </Paper>
@@ -274,16 +284,18 @@ export default function HeroSection() {
                   elevation={0}
                   sx={{
                     p: { xs: 2.5, md: 3 },
-                    borderRadius: 3,
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: 4,
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    backdropFilter: 'blur(16px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
                     textAlign: 'center',
                   }}
                 >
                   <Typography variant="h4" sx={{ color: 'white', fontWeight: 700, mb: 0.5 }}>
                     145+
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
+                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
                     Аптек в сети
                   </Typography>
                 </Paper>
@@ -300,9 +312,11 @@ export default function HeroSection() {
                 elevation={0}
                 sx={{
                   p: { xs: 2.5, md: 3 },
-                  borderRadius: 3,
-                  background: 'linear-gradient(135deg, rgba(4, 116, 44, 0.3) 0%, rgba(4, 116, 44, 0.1) 100%)',
-                  border: '1px solid rgba(4, 116, 44, 0.3)',
+                  borderRadius: 4,
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  backdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: { xs: 2, md: 3 },
@@ -313,7 +327,7 @@ export default function HeroSection() {
                     width: 60,
                     height: 60,
                     borderRadius: 3,
-                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    backgroundColor: 'rgba(4, 116, 44, 0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',

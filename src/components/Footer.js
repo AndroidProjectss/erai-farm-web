@@ -26,9 +26,7 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: TelegramIcon, href: '#', label: 'Telegram' },
   { icon: InstagramIcon, href: '#', label: 'Instagram' },
-  { icon: FacebookIcon, href: '#', label: 'Facebook' },
 ];
 
 export default function Footer() {
