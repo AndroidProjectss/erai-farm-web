@@ -12,9 +12,7 @@ import {
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import { motion } from 'framer-motion';
 
 const navLinks = [
@@ -26,7 +24,7 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { icon: InstagramIcon, href: '#', label: 'Instagram' },
+  { icon: InstagramIcon, href: 'https://www.instagram.com/erai_pharm', label: 'Instagram' },
 ];
 
 export default function Footer() {
@@ -93,7 +91,16 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Box sx={{ mb: 3 }}>
+              <Box
+                sx={{
+                  mb: 3,
+                  display: 'inline-flex',
+                  border: '1px solid rgba(255, 255, 255, 0.9)',
+                  borderRadius: 2,
+                  px: 1.25,
+                  py: 0.75,
+                }}
+              >
                 <Box
                   component="img"
                   src="/logo.png"

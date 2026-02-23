@@ -130,26 +130,24 @@ export default function AboutPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                {/* PLACEHOLDER: Нужно фото офиса/склада компании */}
                 <Box
                   sx={{
                     width: '100%',
                     height: { xs: 250, md: 350 },
-                    background: 'rgba(255,255,255,0.1)',
                     borderRadius: 4,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(255,255,255,0.2)',
+                    overflow: 'hidden',
+                    position: 'relative',
                   }}
                 >
-                  <Box sx={{ textAlign: 'center', p: 4 }}>
-                    <Typography variant="h4" sx={{ mb: 2 }}>📷</Typography>
-                    <Typography sx={{ opacity: 0.8 }}>
-                      Здесь будет фото офиса<br />или склада компании
-                    </Typography>
-                  </Box>
+                  <Image
+                    src="/about.png"
+                    alt="ЭрайФарм — офис и складской комплекс"
+                    fill
+                    sizes="(max-width: 900px) 100vw, 50vw"
+                    style={{ objectFit: 'cover' }}
+                    priority
+                  />
                 </Box>
               </motion.div>
             </Grid>
