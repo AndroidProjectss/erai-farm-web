@@ -7,7 +7,6 @@ import {
   Typography,
   IconButton,
   Divider,
-  useTheme,
 } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
@@ -28,16 +27,14 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const theme = useTheme();
-
   return (
     <Box
       component="footer"
       sx={{
         background: 'linear-gradient(135deg, #16348a 0%, #0d2b52 100%)',
         color: 'white',
-        pt: { xs: 6, md: 8 },
-        pb: 4,
+        pt: { xs: 8, md: 10 },
+        pb: { xs: 6, md: 7 },
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -82,8 +79,8 @@ export default function Footer() {
       />
 
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
-        <Grid container spacing={{ xs: 4, md: 6 }}>
-          {/* Логотип и описание */}
+        <Grid container spacing={{ xs: 5, md: 7 }}>
+          {/* Описание и соцсети */}
           <Grid size={{ xs: 12, md: 4 }}>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -91,21 +88,8 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Box sx={{ mb: 3 }}>
-                <Box
-                  component="img"
-                  src="/logo-wide.png"
-                  alt="ЭрайФарм"
-                  sx={{
-                    width: { xs: 130, sm: 160 },
-                    height: { xs: 52, sm: 64 },
-                    objectFit: 'contain',
-                    // Do not invert: the logo is a PNG and inversion turns it into a white block.
-                  }}
-                />
-              </Box>
               <Typography variant="body2" sx={{ opacity: 0.8, mb: 3, lineHeight: 1.8 }}>
-                Фармацевтическая компания ЭрайФарм — один из крупнейших 
+                Фармацевтическая компания ЭрайФарм — один из крупнейших
                 фармдистрибьюторов в Кыргызстане с 1999 года.
               </Typography>
               <Box sx={{ display: 'flex', gap: 1 }}>
@@ -225,7 +209,7 @@ export default function Footer() {
           </Grid>
         </Grid>
 
-        <Divider sx={{ my: 4, borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+        <Divider sx={{ my: { xs: 5, md: 6 }, borderColor: 'rgba(255, 255, 255, 0.1)' }} />
 
         {/* Copyright */}
         <Box
