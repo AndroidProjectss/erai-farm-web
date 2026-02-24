@@ -13,7 +13,7 @@ export default function HeroSection() {
     <Box
       sx={{
         minHeight: { xs: 'auto', md: '100vh' },
-        background: `linear-gradient(90deg, rgba(13, 43, 82, 0.95) 0%, rgba(13, 43, 82, 0.75) 45%, rgba(13, 43, 82, 0.2) 100%), url(/bg.png) center/cover no-repeat`,
+        background: `linear-gradient(90deg, rgba(13, 43, 82, 0.95) 0%, rgba(13, 43, 82, 0.75) 45%, rgba(13, 43, 82, 0.2) 100%), url(/bg.png) center top/cover no-repeat`,
         position: 'relative',
         overflow: 'hidden',
         display: 'flex',

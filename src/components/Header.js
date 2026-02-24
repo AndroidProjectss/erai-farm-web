@@ -104,7 +104,7 @@ export default function Header() {
     >
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2 }}>
         <Image
-          src="/logo.png"
+          src="/logo-wide.png"
           alt="ЭрайФарм"
           width={120}
           height={48}
@@ -186,12 +186,14 @@ export default function Header() {
           <Toolbar
             sx={{
               justifyContent: 'space-between',
-              minHeight: { xs: 70, md: 80 },
+              minHeight: { xs: 88, md: 98 },
               px: { xs: 0 },
+              '& a:focus': { outline: 'none' },
+              '& a:focus-visible': { outline: 'none' },
             }}
           >
             {/* Логотип */}
-            <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400 }}
@@ -201,21 +203,21 @@ export default function Header() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    px: { xs: 1, sm: 1.25 },
-                    py: { xs: 0.75, sm: 0.9 },
-                    borderRadius: 2.5,
+                    px: { xs: 0.75, sm: 0.9 },
+                    py: { xs: 0.2, sm: 0.3 },
+                    borderRadius: 0,
                     backgroundColor: 'transparent',
-                    border: '1px solid transparent',
-                    backdropFilter: 'none',
+                    border: 'none',
                     boxShadow: 'none',
                     transition: 'all 0.3s ease',
+                    lineHeight: 0,
                   }}
                 >
                   <Image
-                    src="/logo.png"
+                    src="/logo-wide.png"
                     alt="ЭрайФарм"
-                    width={140}
-                    height={56}
+                    width={130}
+                    height={52}
                     style={{ objectFit: 'contain' }}
                     priority
                   />
@@ -311,7 +313,7 @@ export default function Header() {
       </Drawer>
 
       {/* Spacer для контента */}
-      <Toolbar sx={{ minHeight: { xs: 70, md: 80 } }} />
+      <Toolbar sx={{ minHeight: { xs: 80, md: 90 } }} />
     </>
   );
 }

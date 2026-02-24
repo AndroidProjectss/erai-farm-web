@@ -91,19 +91,10 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Box
-                sx={{
-                  mb: 3,
-                  display: 'inline-flex',
-                  border: '1px solid rgba(255, 255, 255, 0.9)',
-                  borderRadius: 2,
-                  px: 1.25,
-                  py: 0.75,
-                }}
-              >
+              <Box sx={{ mb: 3 }}>
                 <Box
                   component="img"
-                  src="/logo.png"
+                  src="/logo-wide.png"
                   alt="ЭрайФарм"
                   sx={{
                     width: { xs: 130, sm: 160 },
