@@ -7,6 +7,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SpeedIcon from '@mui/icons-material/Speed';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const logisticsStats = [
   {
@@ -67,6 +68,8 @@ const features = [
 ];
 
 export default function LogisticsSection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -103,7 +106,7 @@ export default function LogisticsSection() {
                   fontWeight: 600,
                 }}
               >
-                Логистика и Склад
+                {t.logistics.overline}
               </Typography>
             </Box>
             
@@ -114,7 +117,7 @@ export default function LogisticsSection() {
                 mb: 2,
               }}
             >
-              Надёжная логистика
+              {t.logistics.title}
             </Typography>
             <Typography
               variant="body1"
@@ -124,8 +127,7 @@ export default function LogisticsSection() {
                 mx: 'auto',
               }}
             >
-              Установленный логистический канал по всей стране с эффективными 
-              ежедневными поставками и соблюдением стандартов хранения
+              {t.logistics.description}
             </Typography>
           </Box>
         </motion.div>
@@ -182,7 +184,7 @@ export default function LogisticsSection() {
                       fontWeight: 600,
                     }}
                   >
-                    {stat.label}
+                    {t.logistics.stats[index].label}
                   </Typography>
                   <Typography
                     variant="caption"
@@ -194,10 +196,10 @@ export default function LogisticsSection() {
                       lineHeight: 1.1,
                       maxWidth: 220,
                       mx: 'auto',
-                      opacity: stat.note ? 1 : 0,
+                      opacity: t.logistics.stats[index].note ? 1 : 0,
                     }}
                   >
-                    {stat.note || '—'}
+                    {t.logistics.stats[index].note || '—'}
                   </Typography>
                 </Paper>
               </motion.div>
@@ -232,12 +234,12 @@ export default function LogisticsSection() {
                     mb: 4,
                   }}
                 >
-                  Наши склады
+                  {t.logistics.warehousesTitle}
                 </Typography>
 
                 {warehouses.map((warehouse, index) => (
                   <motion.div
-                    key={warehouse.city}
+                    key={t.logistics.warehouses[index].city}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -269,11 +271,11 @@ export default function LogisticsSection() {
                               color: 'text.primary',
                             }}
                           >
-                            {warehouse.city}
+                            {t.logistics.warehouses[index].city}
                           </Typography>
                           {warehouse.isMain && (
                             <Chip
-                              label="Главный"
+                              label={t.logistics.mainTag}
                               size="small"
                               sx={{
                                 backgroundColor: 'primary.main',
@@ -288,7 +290,7 @@ export default function LogisticsSection() {
                           variant="body2"
                           sx={{ color: 'text.secondary' }}
                         >
-                          {warehouse.type}
+                          {t.logistics.warehouses[index].type}
                         </Typography>
                       </Box>
                       <Typography
@@ -371,13 +373,13 @@ export default function LogisticsSection() {
                             mb: 1,
                           }}
                         >
-                          {feature.title}
+                          {t.logistics.features[index].title}
                         </Typography>
                         <Typography
                           variant="body2"
                           sx={{ color: 'text.secondary' }}
                         >
-                          {feature.description}
+                          {t.logistics.features[index].description}
                         </Typography>
                       </Paper>
                     </motion.div>

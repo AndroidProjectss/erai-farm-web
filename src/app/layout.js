@@ -3,6 +3,8 @@ import './globals.css';
 import ThemeProvider from '@/theme/ThemeProvider';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { LocaleProvider } from '@/i18n/LocaleProvider';
+import { cookies } from 'next/headers';
 
 const inter = Inter({ 
   subsets: ['latin', 'cyrillic'],
@@ -84,7 +86,11 @@ export const viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const cookieStore = await cookies();
+  const localeCookie = cookieStore.get('locale')?.value;
+  const initialLocale = localeCookie === 'kg' || localeCookie === 'ru' ? localeCookie : 'ru';
+
   const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -105,16 +111,18 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="ru" className={inter.variable}>
+    <html lang={initialLocale} className={inter.variable}>
       <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <ThemeProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <LocaleProvider initialLocale={initialLocale}>
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

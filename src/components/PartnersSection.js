@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Box, Typography, Container, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const partnerLogoFiles = [
   'photo_1_2026-02-06_12-39-08.jpg',
@@ -21,11 +22,12 @@ const partnerLogoFiles = [
   'photo_14_2026-02-06_12-39-08.jpg',
   'photo_15_2026-02-06_12-39-08.jpg',
   'photo_16_2026-02-06_12-39-08.jpg',
+  'photo_17_2026-03-06_13-31-52.jpg',
 ];
 
-const otherPartnersLabel = '+60 других';
-
 export default function PartnersSection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -74,12 +76,12 @@ export default function PartnersSection() {
                   fontWeight: 700,
                 }}
               >
-                78 прямых контрактов
+                {t.partners.badge}
               </Typography>
             </Box>
 
             <Typography variant="h2" sx={{ color: 'white', mb: 2 }}>
-              Наши партнёры
+              {t.partners.title}
             </Typography>
             <Typography
               variant="body1"
@@ -90,8 +92,7 @@ export default function PartnersSection() {
                 lineHeight: 1.7,
               }}
             >
-              Логотипы ключевых партнёров и производителей. Полный список включает десятки других
-              компаний.
+              {t.partners.description}
             </Typography>
           </Box>
         </motion.div>
@@ -161,7 +162,7 @@ export default function PartnersSection() {
                         <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
                           <Image
                             src={`/partners/${file}`}
-                            alt={`Логотип партнёра ${index + 1}`}
+                            alt={`${t.partners.logoAlt} ${index + 1}`}
                             fill
                             sizes="(max-width: 600px) 50vw, (max-width: 900px) 33vw, (max-width: 1200px) 25vw, 16vw"
                             style={{ objectFit: 'contain' }}
@@ -208,10 +209,10 @@ export default function PartnersSection() {
                   >
                     <Box>
                       <Typography variant="h5" fontWeight={900} sx={{ lineHeight: 1 }}>
-                        {otherPartnersLabel}
+                        {t.partners.otherCount}
                       </Typography>
                       <Typography variant="body2" sx={{ opacity: 0.9, mt: 0.5 }}>
-                        других партнёров
+                        {t.partners.otherLabel}
                       </Typography>
                     </Box>
                   </Paper>

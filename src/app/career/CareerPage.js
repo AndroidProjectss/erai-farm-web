@@ -23,82 +23,26 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import CTASection from '@/components/CTASection';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const benefits = [
-  {
-    icon: AttachMoneyIcon,
-    title: 'Конкурентная зарплата',
-    description: 'Достойная оплата труда и своевременные выплаты',
-  },
-  {
-    icon: TrendingUpIcon,
-    title: 'Карьерный рост',
-    description: 'Возможности для профессионального развития',
-  },
-  {
-    icon: SchoolIcon,
-    title: 'Обучение',
-    description: 'Корпоративные тренинги и программы развития',
-  },
-  {
-    icon: GroupsIcon,
-    title: 'Дружный коллектив',
-    description: 'Команда профессионалов и комфортная атмосфера',
-  },
-  {
-    icon: WorkIcon,
-    title: 'Стабильность',
-    description: '27 лет на рынке — надежный работодатель',
-  },
+  { icon: AttachMoneyIcon },
+  { icon: TrendingUpIcon },
+  { icon: SchoolIcon },
+  { icon: GroupsIcon },
+  { icon: WorkIcon },
 ];
 
 // PLACEHOLDER: Реальные вакансии будут добавлены позже
 const vacancies = [
-  {
-    title: 'Менеджер по продажам',
-    department: 'Отдел продаж',
-    location: 'г. Бишкек',
-    type: 'Полная занятость',
-    description: 'Ищем энергичного менеджера для работы с аптечными сетями и медицинскими учреждениями.',
-    requirements: [
-      'Опыт работы в продажах от 2 лет',
-      'Знание фармацевтического рынка (желательно)',
-      'Коммуникабельность и ответственность',
-      'Водительские права категории B',
-    ],
-    placeholder: true,
-  },
-  {
-    title: 'Фармацевт-провизор',
-    department: 'Склад',
-    location: 'г. Бишкек',
-    type: 'Полная занятость',
-    description: 'Требуется специалист для работы на складе фармацевтической продукции.',
-    requirements: [
-      'Высшее фармацевтическое образование',
-      'Сертификат провизора',
-      'Знание правил хранения лекарственных средств',
-      'Внимательность и аккуратность',
-    ],
-    placeholder: true,
-  },
-  {
-    title: 'Водитель-экспедитор',
-    department: 'Логистика',
-    location: 'г. Бишкек',
-    type: 'Полная занятость',
-    description: 'Доставка фармацевтической продукции по городу и регионам.',
-    requirements: [
-      'Водительские права категории B/C',
-      'Опыт работы от 1 года',
-      'Знание города и области',
-      'Ответственность и пунктуальность',
-    ],
-    placeholder: true,
-  },
+  { id: 1 },
+  { id: 2 },
+  { id: 3 },
 ];
 
 export default function CareerPage() {
+  const { t } = useLocale();
+
   return (
     <>
       {/* Hero секция */}
@@ -137,17 +81,16 @@ export default function CareerPage() {
                 variant="overline"
                 sx={{ letterSpacing: 3, opacity: 0.8, mb: 2, display: 'block' }}
               >
-                Присоединяйтесь к нам
+                {t.careerPage.heroOverline}
               </Typography>
               <Typography variant="h1" sx={{ mb: 3 }}>
-                Карьера в ЭрайФарм
+                {t.careerPage.heroTitle}
               </Typography>
               <Typography
                 variant="h5"
                 sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6, maxWidth: 700, mx: 'auto' }}
               >
-                Станьте частью команды одной из крупнейших фармацевтических 
-                компаний Кыргызстана с 27-летней историей успеха
+                {t.careerPage.heroDescription}
               </Typography>
             </Box>
           </motion.div>
@@ -164,17 +107,17 @@ export default function CareerPage() {
           >
             <Box sx={{ textAlign: 'center', mb: 6 }}>
               <Typography variant="overline" sx={{ color: 'secondary.main', letterSpacing: 3 }}>
-                Почему мы
+                {t.careerPage.benefitsOverline}
               </Typography>
               <Typography variant="h2" color="primary.main" sx={{ mt: 1 }}>
-                Преимущества работы у нас
+                {t.careerPage.benefitsTitle}
               </Typography>
             </Box>
           </motion.div>
 
           <Grid container spacing={3} justifyContent="center">
             {benefits.map((benefit, index) => (
-              <Grid key={benefit.title} size={{ xs: 12, sm: 6, md: 4 }}>
+              <Grid key={`benefit-${index}`} size={{ xs: 12, sm: 6, md: 4 }}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -211,10 +154,10 @@ export default function CareerPage() {
                       <benefit.icon sx={{ color: 'white', fontSize: 28 }} />
                     </Box>
                     <Typography variant="h5" fontWeight={600} sx={{ mb: 1 }}>
-                      {benefit.title}
+                      {t.careerPage.benefits[index].title}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
-                      {benefit.description}
+                      {t.careerPage.benefits[index].description}
                     </Typography>
                   </Paper>
                 </motion.div>
@@ -234,21 +177,20 @@ export default function CareerPage() {
           >
             <Box sx={{ textAlign: 'center', mb: 6 }}>
               <Typography variant="overline" sx={{ color: 'secondary.main', letterSpacing: 3 }}>
-                Открытые позиции
+                {t.careerPage.vacanciesOverline}
               </Typography>
               <Typography variant="h2" color="primary.main" sx={{ mt: 1, mb: 2 }}>
-                Вакансии
+                {t.careerPage.vacanciesTitle}
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto' }}>
-                Мы всегда в поиске талантливых специалистов. Ознакомьтесь с 
-                актуальными вакансиями или отправьте резюме на рассмотрение.
+                {t.careerPage.vacanciesDescription}
               </Typography>
             </Box>
           </motion.div>
 
           {vacancies.map((vacancy, index) => (
             <motion.div
-              key={vacancy.title}
+              key={`vacancy-${vacancy.id}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -273,29 +215,29 @@ export default function CareerPage() {
                 >
                   <Box sx={{ flex: 1, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 2 }}>
                     <Typography variant="h6" fontWeight={600}>
-                      {vacancy.title}
+                      {t.careerPage.vacancies[index].title}
                     </Typography>
-                    <Chip label={vacancy.department} size="small" color="primary" variant="outlined" />
-                    <Chip label={vacancy.location} size="small" variant="outlined" />
-                    <Chip label={vacancy.type} size="small" color="secondary" />
+                    <Chip label={t.careerPage.vacancies[index].department} size="small" color="primary" variant="outlined" />
+                    <Chip label={t.careerPage.vacancies[index].location} size="small" variant="outlined" />
+                    <Chip label={t.careerPage.vacancies[index].type} size="small" color="secondary" />
                   </Box>
                 </AccordionSummary>
                 <AccordionDetails sx={{ px: 4, pb: 4 }}>
                   <Typography variant="body1" sx={{ mb: 3 }}>
-                    {vacancy.description}
+                    {t.careerPage.vacancies[index].description}
                   </Typography>
                   <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 2 }}>
-                    Требования:
+                    {t.careerPage.requirements}
                   </Typography>
                   <Box component="ul" sx={{ pl: 3, mb: 3 }}>
-                    {vacancy.requirements.map((req) => (
+                    {t.careerPage.vacancies[index].requirements.map((req) => (
                       <Typography component="li" variant="body2" key={req} sx={{ mb: 1 }}>
                         {req}
                       </Typography>
                     ))}
                   </Box>
                   <Button variant="contained" color="primary">
-                    Откликнуться
+                    {t.careerPage.apply}
                   </Button>
                 </AccordionDetails>
               </Accordion>
@@ -315,11 +257,10 @@ export default function CareerPage() {
             <Card sx={{ borderRadius: 4, textAlign: 'center' }}>
               <CardContent sx={{ p: { xs: 4, md: 6 } }}>
                 <Typography variant="h3" color="primary.main" sx={{ mb: 2 }}>
-                  HR-отдел
+                  {t.careerPage.hrTitle}
                 </Typography>
                 <Typography variant="body1" color="text.secondary" sx={{ mb: 4, maxWidth: 500, mx: 'auto' }}>
-                  Для получения информации о вакансиях или отправки резюме 
-                  свяжитесь с нашим отделом кадров
+                  {t.careerPage.hrDescription}
                 </Typography>
                 
                 <Grid container spacing={3} justifyContent="center">
@@ -335,7 +276,7 @@ export default function CareerPage() {
                     >
                       <PhoneIcon sx={{ fontSize: 32, mb: 1 }} />
                       <Typography variant="h6" fontWeight={600}>
-                        Телефон HR
+                        {t.careerPage.hrPhone}
                       </Typography>
                       <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
                         +996 706 929230
@@ -354,7 +295,7 @@ export default function CareerPage() {
                     >
                       <EmailIcon sx={{ fontSize: 32, mb: 1 }} />
                       <Typography variant="h6" fontWeight={600}>
-                        Email
+                        {t.careerPage.hrEmail}
                       </Typography>
                       <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
                         eraifarm.hr@gmail.com

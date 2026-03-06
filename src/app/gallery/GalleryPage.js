@@ -1,12 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Box,
   Typography,
   Container,
   Grid,
   Card,
-  CardMedia,
   Tabs,
   Tab,
   Chip,
@@ -25,100 +24,35 @@ import BusinessIcon from '@mui/icons-material/Business';
 import GroupsIcon from '@mui/icons-material/Groups';
 import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
 import CTASection from '@/components/CTASection';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 // PLACEHOLDER: Реальные фото будут добавлены после фотосессии
 const galleryCategories = [
-  { id: 'all', label: 'Все', icon: null },
-  { id: 'warehouse', label: 'Склады', icon: WarehouseIcon },
-  { id: 'office', label: 'Офис', icon: BusinessIcon },
-  { id: 'team', label: 'Команда', icon: GroupsIcon },
-  { id: 'products', label: 'Эксклюзивы', icon: LocalPharmacyIcon },
-];
-
-// PLACEHOLDER данные галереи
-const galleryItems = [
-  {
-    id: 1,
-    category: 'warehouse',
-    title: 'Главный склад',
-    description: 'Современный складской комплекс площадью 4000 м²',
-    placeholder: true,
-  },
-  {
-    id: 2,
-    category: 'warehouse',
-    title: 'Зона хранения',
-    description: 'Температурный контроль и соблюдение всех стандартов',
-    placeholder: true,
-  },
-  {
-    id: 3,
-    category: 'warehouse',
-    title: 'Логистический центр',
-    description: 'Автоматизированная система комплектации',
-    placeholder: true,
-  },
-  {
-    id: 4,
-    category: 'office',
-    title: 'Головной офис',
-    description: 'Офис компании в г. Бишкек',
-    placeholder: true,
-  },
-  {
-    id: 5,
-    category: 'office',
-    title: 'Переговорная',
-    description: 'Комната для встреч с партнерами',
-    placeholder: true,
-  },
-  {
-    id: 6,
-    category: 'team',
-    title: 'Руководство',
-    description: 'Команда руководителей компании',
-    placeholder: true,
-  },
-  {
-    id: 7,
-    category: 'team',
-    title: 'Отдел продаж',
-    description: 'Профессиональная команда менеджеров',
-    placeholder: true,
-  },
-  {
-    id: 8,
-    category: 'team',
-    title: 'Складская команда',
-    description: 'Специалисты логистики',
-    placeholder: true,
-  },
-  {
-    id: 9,
-    category: 'products',
-    title: 'Эксклюзивная продукция',
-    description: 'Препараты эксклюзивной дистрибуции',
-    placeholder: true,
-  },
-  {
-    id: 10,
-    category: 'products',
-    title: 'Ассортимент',
-    description: 'Широкий выбор фармацевтической продукции',
-    placeholder: true,
-  },
+  { id: 'all', icon: null },
+  { id: 'warehouse', icon: WarehouseIcon },
+  { id: 'office', icon: BusinessIcon },
+  { id: 'team', icon: GroupsIcon },
+  { id: 'products', icon: LocalPharmacyIcon },
 ];
 
 export default function GalleryPage() {
+  const { t } = useLocale();
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const theme = useTheme();
   const isMobileFilters = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const galleryItems = useMemo(
+    () => t.galleryPage.items.map((item, index) => ({ id: index + 1, ...item, placeholder: true })),
+    [t.galleryPage.items]
+  );
+
   const filteredItems = activeCategory === 'all'
     ? galleryItems
     : galleryItems.filter(item => item.category === activeCategory);
+
+  const categoryLabel = (id) => t.galleryPage.categories[id] || id;
 
   const handleImageClick = (item) => {
     setSelectedImage(item);
@@ -180,17 +114,16 @@ export default function GalleryPage() {
                 variant="overline"
                 sx={{ letterSpacing: 3, opacity: 0.8, mb: 2, display: 'block' }}
               >
-                Фотогалерея
+                {t.galleryPage.heroOverline}
               </Typography>
               <Typography variant="h1" sx={{ mb: 3 }}>
-                Галерея
+                {t.galleryPage.heroTitle}
               </Typography>
               <Typography
                 variant="h5"
                 sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6, maxWidth: 600, mx: 'auto' }}
               >
-                Фотографии нашего офиса, складских комплексов, 
-                команды и эксклюзивной продукции
+                {t.galleryPage.heroDescription}
               </Typography>
             </Box>
           </motion.div>
@@ -219,7 +152,7 @@ export default function GalleryPage() {
                   {galleryCategories.map((cat) => (
                     <Chip
                       key={cat.id}
-                      label={cat.label}
+                      label={categoryLabel(cat.id)}
                       icon={cat.icon ? <cat.icon fontSize="small" /> : undefined}
                       clickable
                       onClick={() => setActiveCategory(cat.id)}
@@ -256,7 +189,7 @@ export default function GalleryPage() {
                     <Tab
                       key={cat.id}
                       value={cat.id}
-                      label={cat.label}
+                      label={categoryLabel(cat.id)}
                       icon={cat.icon ? <cat.icon /> : undefined}
                       iconPosition="start"
                     />
@@ -318,7 +251,7 @@ export default function GalleryPage() {
                             variant="body2"
                             sx={{ color: 'white', opacity: 0.6, textAlign: 'center', mt: 1 }}
                           >
-                            Фото будет добавлено
+                            {t.galleryPage.placeholderCard}
                           </Typography>
                         </Box>
                         
@@ -435,7 +368,7 @@ export default function GalleryPage() {
                   📷
                 </Typography>
                 <Typography variant="h6" sx={{ color: 'white', opacity: 0.6, mt: 2 }}>
-                  Фото будет добавлено после фотосессии
+                  {t.galleryPage.placeholderModal}
                 </Typography>
               </Box>
               <Box sx={{ p: 3 }}>

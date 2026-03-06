@@ -7,47 +7,50 @@ import BusinessIcon from '@mui/icons-material/Business';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import GavelIcon from '@mui/icons-material/Gavel';
-
-const directions = [
-  {
-    icon: BusinessIcon,
-    title: 'Дистрибуция',
-    description: 'Охвачены все каналы, включая госпитальный, где мы являемся одним из основных игроков по поставке антибиотиков',
-    color: '#16348a',
-  },
-  {
-    icon: StorefrontIcon,
-    title: 'Аптечные сети',
-    description: 'Одна из крупнейших сетей в КР с акцентом на потребительские услуги — более 145 аптек',
-    color: '#04742c',
-  },
-  {
-    icon: LocalShippingIcon,
-    title: 'Логистика и Склад',
-    description: 'Установленный логистический канал по всей стране с эффективными ежедневными поставками',
-    color: '#16348a',
-  },
-  {
-    icon: CampaignIcon,
-    title: 'Отделы продаж и маркетинга',
-    description: 'Возможность создания эксклюзивных команд вплоть до полноценного представительства',
-    color: '#04742c',
-  },
-  {
-    icon: WarehouseIcon,
-    title: 'Региональные склады',
-    description: 'Собственные склады в городах Манас и Кара-Балта, а также складские объекты в регионе Иссык-Куль для своевременного и стабильного обеспечения населения',
-    color: '#16348a',
-  },
-  {
-    icon: GavelIcon,
-    title: 'Службы поддержки',
-    description: 'Юридический, Комплаенс, Регистрация и Фармаконадзор — полное соблюдение этических норм',
-    color: '#04742c',
-  },
-];
+import { useLocale } from '@/i18n/LocaleProvider';
 
 export default function DirectionsSection() {
+  const { t } = useLocale();
+
+  const directions = [
+    {
+      icon: BusinessIcon,
+      title: t.directions.items[0].title,
+      description: t.directions.items[0].description,
+      color: '#16348a',
+    },
+    {
+      icon: StorefrontIcon,
+      title: t.directions.items[1].title,
+      description: t.directions.items[1].description,
+      color: '#04742c',
+    },
+    {
+      icon: LocalShippingIcon,
+      title: t.directions.items[2].title,
+      description: t.directions.items[2].description,
+      color: '#16348a',
+    },
+    {
+      icon: CampaignIcon,
+      title: t.directions.items[3].title,
+      description: t.directions.items[3].description,
+      color: '#04742c',
+    },
+    {
+      icon: WarehouseIcon,
+      title: t.directions.items[4].title,
+      description: t.directions.items[4].description,
+      color: '#16348a',
+    },
+    {
+      icon: GavelIcon,
+      title: t.directions.items[5].title,
+      description: t.directions.items[5].description,
+      color: '#04742c',
+    },
+  ];
+
   return (
     <Box
       sx={{
@@ -71,7 +74,7 @@ export default function DirectionsSection() {
                 fontWeight: 600,
               }}
             >
-              Направления деятельности
+              {t.directions.overline}
             </Typography>
             <Typography
               variant="h2"
@@ -81,7 +84,7 @@ export default function DirectionsSection() {
                 mb: 2,
               }}
             >
-              Полный цикл фармбизнеса
+              {t.directions.title}
             </Typography>
             <Typography
               variant="body1"
@@ -91,8 +94,7 @@ export default function DirectionsSection() {
                 mx: 'auto',
               }}
             >
-              ЭрайФарм объединяет все ключевые направления фармацевтического бизнеса — 
-              от импорта и дистрибьюции до собственной розничной сети и маркетинговой поддержки
+              {t.directions.description}
             </Typography>
           </Box>
         </motion.div>

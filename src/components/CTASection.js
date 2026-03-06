@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 export default function CTASection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -56,7 +59,7 @@ export default function CTASection() {
                 mb: 3,
               }}
             >
-              Готовы к сотрудничеству?
+              {t.cta.title}
             </Typography>
             
             <Typography
@@ -70,8 +73,7 @@ export default function CTASection() {
                 lineHeight: 1.6,
               }}
             >
-              Свяжитесь с нами для обсуждения партнерства или получения 
-              дополнительной информации о наших услугах
+              {t.cta.description}
             </Typography>
 
             <Box
@@ -105,7 +107,7 @@ export default function CTASection() {
                   }}
                   startIcon={<EmailIcon />}
                 >
-                  Написать нам
+                  {t.cta.button}
                 </Button>
               </motion.div>
               
@@ -141,7 +143,7 @@ export default function CTASection() {
                 color: 'rgba(255, 255, 255, 0.6)',
               }}
             >
-              Мы ответим в течение рабочего дня
+              {t.cta.responseTime}
             </Typography>
           </Box>
         </motion.div>

@@ -5,10 +5,13 @@ import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const partners = ['Биннофарм', 'Ремеди Групп', 'Синтез', 'KRKA', 'STADA', '+70'];
 
 export default function HeroSection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -99,7 +102,7 @@ export default function HeroSection() {
                   variant="body2"
                   sx={{ color: '#0a8a38', fontWeight: 600, letterSpacing: 0.5 }}
                 >
-                  3 место по рейтингу ввоза в КР
+                  {t.hero.badge}
                 </Typography>
               </Box>
 
@@ -115,7 +118,7 @@ export default function HeroSection() {
                   hyphens: 'none',
                 }}
               >
-                Фармацевтическая
+                {t.hero.titleTop}
                 <Box
                   component="span"
                   sx={{
@@ -126,7 +129,7 @@ export default function HeroSection() {
                     WebkitTextFillColor: 'transparent',
                   }}
                 >
-                  компания ЭрайФарм
+                  {t.hero.titleBottom}
                 </Box>
               </Typography>
 
@@ -142,8 +145,7 @@ export default function HeroSection() {
                   fontSize: { xs: '1.05rem', sm: '1.15rem', md: '1.25rem' },
                 }}
               >
-                Один из лидеров фармацевтической дистрибуции в Кыргызстане с 1999 года.
-                Прямые контракты с ведущими мировыми производителями.
+                {t.hero.description}
               </Typography>
 
               {/* CTA Buttons */}
@@ -175,7 +177,7 @@ export default function HeroSection() {
                       },
                     }}
                   >
-                    Связаться с нами
+                    {t.hero.ctaPrimary}
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
@@ -199,7 +201,7 @@ export default function HeroSection() {
                       },
                     }}
                   >
-                    О компании
+                    {t.hero.ctaSecondary}
                   </Button>
                 </motion.div>
               </Box>
@@ -210,7 +212,7 @@ export default function HeroSection() {
                   variant="body2"
                   sx={{ color: 'rgba(255,255,255,0.5)', mr: 1, alignSelf: 'center' }}
                 >
-                  Партнёры:
+                  {t.hero.partners}
                 </Typography>
                 {partners.map((partner) => (
                   <Chip
@@ -269,7 +271,7 @@ export default function HeroSection() {
                     15%
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-                    Доля рынка
+                    {t.hero.marketShare}
                   </Typography>
                 </Paper>
               </motion.div>
@@ -296,7 +298,7 @@ export default function HeroSection() {
                     145+
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-                    Аптек в сети
+                    {t.hero.pharmacies}
                   </Typography>
                 </Paper>
               </motion.div>
@@ -337,13 +339,13 @@ export default function HeroSection() {
                 </Box>
                 <Box>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', mb: 0.5 }}>
-                    Розничная сеть
+                    {t.hero.retailNetwork}
                   </Typography>
                   <Typography variant="h6" sx={{ color: 'white', fontWeight: 600 }}>
-                    Более 300 фармацевтов
+                    {t.hero.pharmacists}
                   </Typography>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)' }}>
-                    Цель: 200 точек к 2026
+                    {t.hero.target}
                   </Typography>
                 </Box>
               </Paper>

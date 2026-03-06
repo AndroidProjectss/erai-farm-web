@@ -22,75 +22,68 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import PhoneIcon from '@mui/icons-material/Phone';
 import { motion } from 'framer-motion';
-
-const navItems = [
-  { label: 'Главная', href: '/' },
-  { label: 'О нас', href: '/about' },
-  { label: 'Карьера', href: '/career' },
-  { label: 'Галерея', href: '/gallery' },
-  { label: 'Контакты', href: '/contacts' },
-];
+import { useLocale } from '@/i18n/LocaleProvider';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { locale, setLocale, t } = useLocale();
   const pathname = usePathname();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'), { noSsr: true });
 
-  // Handle hydration
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const navItems = [
+    { label: t.nav.home, href: '/' },
+    { label: t.nav.about, href: '/about' },
+    { label: t.nav.career, href: '/career' },
+    { label: t.nav.gallery, href: '/gallery' },
+    { label: t.nav.contacts, href: '/contacts' },
+  ];
 
-  // Handle scroll
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
+  const toggleLocale = () => {
+    setLocale(locale === 'ru' ? 'kg' : 'ru');
+  };
 
-    const getScrollY = () => {
-      const windowY = window.scrollY || 0;
-      const docY = document.documentElement?.scrollTop || document.body?.scrollTop || 0;
-      return Math.max(windowY, docY);
-    };
+  const switcherLabel = locale === 'ru' ? 'KG' : 'RU';
 
-    const updateScrolled = () => {
-      setScrolled(getScrollY() > 50);
-    };
-
-    let raf1 = 0;
-    let raf2 = 0;
-    let timeoutId = 0;
-
-    // Next.js can restore scroll position asynchronously after navigation.
-    // Re-check a few times to avoid the header "sticking" in the wrong state.
-    updateScrolled();
-    raf1 = window.requestAnimationFrame(updateScrolled);
-    raf2 = window.requestAnimationFrame(updateScrolled);
-    timeoutId = window.setTimeout(updateScrolled, 150);
-
-    window.addEventListener('scroll', updateScrolled, { passive: true });
-    window.addEventListener('resize', updateScrolled, { passive: true });
-    window.addEventListener('pageshow', updateScrolled);
-
-    return () => {
-      window.cancelAnimationFrame(raf1);
-      window.cancelAnimationFrame(raf2);
-      window.clearTimeout(timeoutId);
-      window.removeEventListener('scroll', updateScrolled);
-      window.removeEventListener('resize', updateScrolled);
-      window.removeEventListener('pageshow', updateScrolled);
-    };
-  }, [pathname]);
+  const renderLanguageSwitcher = () => (
+    <Button
+      onClick={toggleLocale}
+      aria-label="Toggle language"
+      sx={{
+        minWidth: 94,
+        height: 54,
+        px: 2.2,
+        borderRadius: 2.5,
+        border: '1px solid',
+        borderColor: 'grey.300',
+        backgroundColor: 'grey.100',
+        color: 'text.primary',
+        fontWeight: 500,
+        fontSize: '1rem',
+        lineHeight: 1,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 1,
+        textTransform: 'none',
+        '&:hover': {
+          backgroundColor: 'grey.200',
+          borderColor: 'grey.400',
+        },
+      }}
+    >
+      <Box component="span" sx={{ fontSize: '1.05rem', lineHeight: 1, color: 'primary.main' }}>
+        🌐
+      </Box>
+      <Box component="span" sx={{ fontWeight: 600, fontSize: '1rem', lineHeight: 1 }} suppressHydrationWarning>
+        {switcherLabel}
+      </Box>
+    </Button>
+  );
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  // Закрываем меню при смене страницы
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   const drawer = (
     <Box
@@ -127,6 +120,7 @@ export default function Header() {
               <ListItemButton
                 component={Link}
                 href={item.href}
+                onClick={() => setMobileOpen(false)}
                 sx={{
                   py: 2,
                   px: 3,
@@ -139,9 +133,11 @@ export default function Header() {
               >
                 <ListItemText
                   primary={item.label}
-                  primaryTypographyProps={{
-                    fontSize: '1.25rem',
-                    fontWeight: pathname === item.href ? 600 : 400,
+                  slotProps={{
+                    primary: {
+                      fontSize: '1.25rem',
+                      fontWeight: pathname === item.href ? 600 : 400,
+                    },
                   }}
                 />
               </ListItemButton>
@@ -150,6 +146,7 @@ export default function Header() {
         ))}
       </List>
       <Box sx={{ p: 3, borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+        <Box sx={{ mb: 2 }}>{renderLanguageSwitcher()}</Box>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
           <PhoneIcon fontSize="small" />
           <span>+996 (312) 925511</span>
@@ -162,7 +159,7 @@ export default function Header() {
           href="/contacts"
           sx={{ mt: 2 }}
         >
-          Связаться с нами
+          {t.nav.contactUs}
         </Button>
       </Box>
     </Box>
@@ -226,8 +223,9 @@ export default function Header() {
             </Link>
 
             {/* Desktop навигация */}
-            {mounted && !isMobile && (
+            {!isMobile && (
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {renderLanguageSwitcher()}
                 {navItems.map((item) => (
                   <motion.div
                     key={item.href}
@@ -270,25 +268,28 @@ export default function Header() {
                   href="/contacts"
                   sx={{ ml: 2 }}
                 >
-                  Связаться
+                  {t.nav.contactShort}
                 </Button>
               </Box>
             )}
 
             {/* Mobile menu button */}
-            {mounted && isMobile && (
-              <IconButton
-                onClick={handleDrawerToggle}
-                sx={{
-                  color: 'primary.main',
-                  backgroundColor: 'rgba(22, 52, 138, 0.08)',
-                  '&:hover': {
-                    backgroundColor: 'rgba(22, 52, 138, 0.14)',
-                  },
-                }}
-              >
-                <MenuIcon />
-              </IconButton>
+            {isMobile && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {renderLanguageSwitcher()}
+                <IconButton
+                  onClick={handleDrawerToggle}
+                  sx={{
+                    color: 'primary.main',
+                    backgroundColor: 'rgba(22, 52, 138, 0.08)',
+                    '&:hover': {
+                      backgroundColor: 'rgba(22, 52, 138, 0.14)',
+                    },
+                  }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Box>
             )}
           </Toolbar>
         </Container>

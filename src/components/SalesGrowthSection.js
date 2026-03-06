@@ -3,6 +3,7 @@ import { Box, Typography, Container, Grid, Paper } from '@mui/material';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const salesData = [
   { year: '2021', value: 15.8, growth: null },
@@ -44,6 +45,8 @@ function AnimatedNumber({ value, suffix = '', duration = 2 }) {
 }
 
 export default function SalesGrowthSection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -80,7 +83,7 @@ export default function SalesGrowthSection() {
                   fontWeight: 600,
                 }}
               >
-                Рост продаж
+                {t.sales.overline}
               </Typography>
             </Box>
             
@@ -91,7 +94,7 @@ export default function SalesGrowthSection() {
                 mb: 2,
               }}
             >
-              Динамика развития
+              {t.sales.title}
             </Typography>
             <Typography
               variant="body1"
@@ -101,7 +104,7 @@ export default function SalesGrowthSection() {
                 mx: 'auto',
               }}
             >
-              Стабильный рост продаж — результат стратегического развития и доверия партнёров
+              {t.sales.description}
             </Typography>
           </Box>
         </motion.div>
@@ -255,7 +258,7 @@ export default function SalesGrowthSection() {
                         fontSize: '0.65rem',
                       }}
                     >
-                      прогноз
+                      {t.sales.forecast}
                     </Typography>
                   )}
                   </Box>
@@ -272,7 +275,7 @@ export default function SalesGrowthSection() {
               value: 283,
               suffix: '%',
               label: 'Рост за 5 лет',
-              description: 'по сравнению с 2021 годом',
+              description: t.sales.metricDescription,
               color: '#16348a',
             },
           ].map((metric, index) => (
@@ -316,7 +319,7 @@ export default function SalesGrowthSection() {
                       mb: 0.5,
                     }}
                   >
-                    {metric.label}
+                    {t.sales.metricLabel}
                   </Typography>
                   <Typography
                     variant="body2"

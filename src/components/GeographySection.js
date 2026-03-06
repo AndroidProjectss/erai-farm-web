@@ -1,8 +1,11 @@
 'use client';
 import { Box, Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 export default function GeographySection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -38,10 +41,10 @@ export default function GeographySection() {
             }}
           >
             {[
-              { value: '7', label: 'Областей охвачено' },
-              { value: '3', label: 'Складов в регионах' },
-              { value: '145+', label: 'Аптек по стране' },
-              { value: '24ч', label: 'Доставка в любую точку' },
+              { value: '7', label: t.geography.labels[0] },
+              { value: '3', label: t.geography.labels[1] },
+              { value: '145+', label: t.geography.labels[2] },
+              { value: '24ч', label: t.geography.labels[3] },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

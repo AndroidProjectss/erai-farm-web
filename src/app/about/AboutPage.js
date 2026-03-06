@@ -5,7 +5,6 @@ import {
   Container,
   Grid,
   Paper,
-  Button,
   Card,
   CardContent,
   Avatar,
@@ -21,52 +20,25 @@ import HistoryIcon from '@mui/icons-material/History';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CTASection from '@/components/CTASection';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const stats = [
-  { icon: TrendingUpIcon, value: '27', label: 'лет на рынке', suffix: '' },
-  { icon: WarehouseIcon, value: '4 000', label: 'м² складов', suffix: '' },
-  { icon: HandshakeIcon, value: '70+', label: 'контрактов', suffix: '' },
-  { icon: GroupsIcon, value: '400+', label: 'сотрудников', suffix: '' },
-  { icon: Inventory2Icon, value: '1 млрд+', label: 'упаковок в год', suffix: '' },
+  { icon: TrendingUpIcon, value: '27' },
+  { icon: WarehouseIcon, value: '4 000' },
+  { icon: HandshakeIcon, value: '70+' },
+  { icon: GroupsIcon, value: '400+' },
+  { icon: Inventory2Icon, value: '1 млрд+' },
 ];
 
 const values = [
-  {
-    icon: VerifiedIcon,
-    title: 'Качество',
-    description: 'Мы работаем только с проверенными производителями и гарантируем качество каждого препарата',
-  },
-  {
-    icon: HistoryIcon,
-    title: 'Надежность',
-    description: '27 лет стабильной работы на рынке — доказательство нашей надежности как партнера',
-  },
-  {
-    icon: EmojiEventsIcon,
-    title: 'Профессионализм',
-    description: 'Команда профессионалов, которая развивает фармацевтическую индустрию Кыргызстана',
-  },
-];
-
-const team = [
-  {
-    name: 'Руководитель компании',
-    position: 'Генеральный директор',
-    placeholder: true,
-  },
-  {
-    name: 'Заместитель директора',
-    position: 'Заместитель генерального директора',
-    placeholder: true,
-  },
-  {
-    name: 'Коммерческий директор',
-    position: 'Директор по продажам',
-    placeholder: true,
-  },
+  { icon: VerifiedIcon },
+  { icon: HistoryIcon },
+  { icon: EmojiEventsIcon },
 ];
 
 export default function AboutPage() {
+  const { t } = useLocale();
+
   return (
     <>
       {/* Hero секция */}
@@ -106,18 +78,16 @@ export default function AboutPage() {
                   variant="overline"
                   sx={{ letterSpacing: 3, opacity: 0.8, mb: 2, display: 'block' }}
                 >
-                  О компании
+                  {t.aboutPage.heroOverline}
                 </Typography>
                 <Typography variant="h1" sx={{ mb: 3 }}>
-                  О нас
+                  {t.aboutPage.heroTitle}
                 </Typography>
                 <Typography
                   variant="h5"
                   sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6, mb: 4 }}
                 >
-                  Фармацевтическая компания ЭрайФарм основана в 1999 году и на 
-                  сегодняшний день является одним из крупнейших фармдистрибьюторов 
-                  в Кыргызстане.
+                  {t.aboutPage.heroDescription}
                 </Typography>
                 
                 {/* Кнопка скачивания презентации убрана по ТЗ */}
@@ -142,7 +112,7 @@ export default function AboutPage() {
                 >
                   <Image
                     src="/about.png"
-                    alt="ЭрайФарм — офис и складской комплекс"
+                    alt={t.aboutPage.imageAlt}
                     fill
                     sizes="(max-width: 900px) 100vw, 50vw"
                     style={{ objectFit: 'cover' }}
@@ -172,7 +142,7 @@ export default function AboutPage() {
           >
             {stats.map((stat, index) => (
               <motion.div
-                key={stat.label}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -223,7 +193,7 @@ export default function AboutPage() {
                     {stat.value}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {stat.label}
+                    {t.aboutPage.stats[index]}
                   </Typography>
                 </Paper>
               </motion.div>
@@ -242,10 +212,10 @@ export default function AboutPage() {
           >
             <Box sx={{ textAlign: 'center', mb: 6 }}>
               <Typography variant="overline" sx={{ color: 'secondary.main', letterSpacing: 3 }}>
-                Наша история
+                {t.aboutPage.historyOverline}
               </Typography>
               <Typography variant="h2" color="primary.main" sx={{ mt: 1, mb: 3 }}>
-                27 лет развития
+                {t.aboutPage.historyTitle}
               </Typography>
             </Box>
 
@@ -260,12 +230,7 @@ export default function AboutPage() {
                 mx: 'auto',
               }}
             >
-              Фармацевтическая компания ЭрайФарм основана в 1999 году и на сегодняшний 
-              день является одним из крупнейших фармдистрибьюторов в Кыргызстане. За 27 
-              лет работы мы выстроили надежную систему логистики, охватывающую всю 
-              территорию страны, наладили прямые контракты с более чем 70 производителями 
-              фармацевтической продукции и сформировали команду из более чем 400 
-              профессионалов своего дела.
+              {t.aboutPage.historyDescription}
             </Typography>
           </motion.div>
         </Container>
@@ -281,10 +246,10 @@ export default function AboutPage() {
           >
             <Box sx={{ textAlign: 'center', mb: 6 }}>
               <Typography variant="overline" sx={{ color: 'secondary.main', letterSpacing: 3 }}>
-                Наши принципы
+                {t.aboutPage.principlesOverline}
               </Typography>
               <Typography variant="h2" color="primary.main" sx={{ mt: 1 }}>
-                Ценности компании
+                {t.aboutPage.principlesTitle}
               </Typography>
             </Box>
           </motion.div>
@@ -292,7 +257,7 @@ export default function AboutPage() {
           <Grid container spacing={4} alignItems="stretch">
             {values.map((value, index) => (
               <Grid
-                key={value.title}
+                key={index}
                 size={{ xs: 12, md: 4 }}
                 sx={{ display: 'flex' }}
               >
@@ -339,10 +304,10 @@ export default function AboutPage() {
                         <value.icon sx={{ fontSize: 36, color: 'white' }} />
                       </Box>
                       <Typography variant="h5" fontWeight={600} sx={{ mb: 2 }}>
-                        {value.title}
+                        {t.aboutPage.values[index].title}
                       </Typography>
                       <Typography variant="body1" color="text.secondary" sx={{ flex: 1 }}>
-                        {value.description}
+                        {t.aboutPage.values[index].description}
                       </Typography>
                     </CardContent>
                   </Card>
@@ -363,19 +328,19 @@ export default function AboutPage() {
           >
             <Box sx={{ textAlign: 'center', mb: 6 }}>
               <Typography variant="overline" sx={{ color: 'secondary.main', letterSpacing: 3 }}>
-                Команда
+                {t.aboutPage.teamOverline}
               </Typography>
               <Typography variant="h2" color="primary.main" sx={{ mt: 1, mb: 2 }}>
-                Руководство компании
+                {t.aboutPage.teamTitle}
               </Typography>
               <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto' }}>
-                Профессиональная команда с многолетним опытом в фармацевтической отрасли
+                {t.aboutPage.teamDescription}
               </Typography>
             </Box>
           </motion.div>
 
           <Grid container spacing={4} justifyContent="center">
-            {team.map((member, index) => (
+            {t.aboutPage.teamMembers.map((member, index) => (
               <Grid key={member.position} size={{ xs: 12, sm: 6, md: 4 }}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -413,7 +378,7 @@ export default function AboutPage() {
                           fontStyle: 'italic',
                         }}
                       >
-                        📷 Ожидается фото после фотосессии
+                        {t.aboutPage.teamPhotoPending}
                       </Typography>
                     </CardContent>
                   </Card>

@@ -19,35 +19,10 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SendIcon from '@mui/icons-material/Send';
 import { useMemo, useState } from 'react';
-
-const contactInfo = [
-  {
-    icon: PhoneIcon,
-    title: 'Телефоны',
-    content: ['+996 (312) 925511', '+996 (312) 925510', '+996 (312) 995509'],
-    color: 'primary',
-  },
-  {
-    icon: EmailIcon,
-    title: 'Email',
-    content: ['eraipharm.corp@erai.kg'],
-    color: 'secondary',
-  },
-  {
-    icon: LocationOnIcon,
-    title: 'Адрес',
-    content: ['720080, г. Бишкек,', 'ул. Профсоюзная, дом № 63'],
-    color: 'primary',
-  },
-  {
-    icon: AccessTimeIcon,
-    title: 'Режим работы',
-    content: ['Пн-Пт: 9:00 - 18:00', 'Сб-Вс: выходной'],
-    color: 'secondary',
-  },
-];
+import { useLocale } from '@/i18n/LocaleProvider';
 
 export default function ContactsPage() {
+  const { t } = useLocale();
   const [form, setForm] = useState({
     name: '',
     phone: '',
@@ -61,9 +36,44 @@ export default function ContactsPage() {
     return {
       lat: 42.885303,
       lon: 74.539373,
-      addressShort: '720080, г. Бишкек, ул. Профсоюзная, дом № 63',
+      addressShort: t.contactsPage.addressShort,
     };
-  }, []);
+  }, [t.contactsPage.addressShort]);
+
+  const contactInfo = useMemo(() => [
+    {
+      id: 'phones',
+      icon: PhoneIcon,
+      type: 'phone',
+      title: t.contactsPage.infoTitles.phones,
+      content: ['+996 (312) 925511', '+996 (312) 925510', '+996 (312) 995509'],
+      color: 'primary',
+    },
+    {
+      id: 'email',
+      icon: EmailIcon,
+      type: 'email',
+      title: t.contactsPage.infoTitles.email,
+      content: ['eraipharm.corp@erai.kg'],
+      color: 'secondary',
+    },
+    {
+      id: 'address',
+      icon: LocationOnIcon,
+      type: 'text',
+      title: t.contactsPage.infoTitles.address,
+      content: t.contactsPage.infoContent.address,
+      color: 'primary',
+    },
+    {
+      id: 'hours',
+      icon: AccessTimeIcon,
+      type: 'text',
+      title: t.contactsPage.infoTitles.hours,
+      content: t.contactsPage.infoContent.hours,
+      color: 'secondary',
+    },
+  ], [t.contactsPage.infoTitles, t.contactsPage.infoContent]);
 
   const twoGisLink = useMemo(() => {
     return 'https://2gis.kg/bishkek/geo/70030076268410586/74.539373%2C42.885303?m=74.539259%2C42.885506%2F17.63';
@@ -89,17 +99,17 @@ export default function ContactsPage() {
     const message = form.message.trim();
 
     if (!name) {
-      setStatus({ type: 'error', message: 'Пожалуйста, заполните поле “Имя”.' });
+      setStatus({ type: 'error', message: t.contactsPage.formValidationName });
       return;
     }
 
     if (!phone && !email) {
-      setStatus({ type: 'error', message: 'Укажите телефон или email (хотя бы одно поле).' });
+      setStatus({ type: 'error', message: t.contactsPage.formValidationContact });
       return;
     }
 
     if (!message) {
-      setStatus({ type: 'error', message: 'Пожалуйста, заполните поле “Сообщение”.' });
+      setStatus({ type: 'error', message: t.contactsPage.formValidationMessage });
       return;
     }
 
@@ -113,15 +123,16 @@ export default function ContactsPage() {
 
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(data?.error || 'Не удалось отправить сообщение.');
+        setStatus({ type: 'error', message: data?.error || t.contactsPage.formSendError });
+        return;
       }
 
-      setStatus({ type: 'success', message: 'Сообщение отправлено. Спасибо!' });
+      setStatus({ type: 'success', message: t.contactsPage.formSendSuccess });
       setForm({ name: '', phone: '', email: '', message: '' });
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error instanceof Error ? error.message : 'Ошибка отправки сообщения.',
+        message: error instanceof Error ? error.message : t.contactsPage.formSendUnknownError,
       });
     } finally {
       setIsSubmitting(false);
@@ -166,16 +177,16 @@ export default function ContactsPage() {
                 variant="overline"
                 sx={{ letterSpacing: 3, opacity: 0.8, mb: 2, display: 'block' }}
               >
-                Свяжитесь с нами
+                {t.contactsPage.heroOverline}
               </Typography>
               <Typography variant="h1" sx={{ mb: 3 }}>
-                Контакты
+                {t.contactsPage.heroTitle}
               </Typography>
               <Typography
                 variant="h5"
                 sx={{ opacity: 0.9, fontWeight: 400, lineHeight: 1.6, maxWidth: 600, mx: 'auto' }}
               >
-                Мы всегда готовы ответить на ваши вопросы и обсудить возможности сотрудничества
+                {t.contactsPage.heroDescription}
               </Typography>
             </Box>
           </motion.div>
@@ -187,7 +198,7 @@ export default function ContactsPage() {
         <Container maxWidth="xl">
           <Grid container spacing={3}>
             {contactInfo.map((info, index) => (
-              <Grid key={info.title} size={{ xs: 12, sm: 6, md: 3 }}>
+              <Grid key={info.id} size={{ xs: 12, sm: 6, md: 3 }}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -238,21 +249,21 @@ export default function ContactsPage() {
                             color="text.secondary"
                             sx={{
                               display: 'block',
-                              ...(info.title === 'Телефоны' && {
+                              ...(info.type === 'phone' && {
                                 '&:hover': { color: 'primary.main' },
                                 cursor: 'pointer',
                                 textDecoration: 'none',
                               }),
-                              ...(info.title === 'Email' && {
+                              ...(info.type === 'email' && {
                                 '&:hover': { color: 'secondary.main' },
                                 textDecoration: 'none',
                               }),
                             }}
-                            {...(info.title === 'Телефоны' && {
+                            {...(info.type === 'phone' && {
                               component: 'a',
                               href: `tel:${line.replace(/\D/g, '')}`,
                             })}
-                            {...(info.title === 'Email' && {
+                            {...(info.type === 'email' && {
                               component: 'a',
                               href: `mailto:${line}`,
                             })}
@@ -298,7 +309,7 @@ export default function ContactsPage() {
                     style={{ border: 0 }}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="ЭрайФарм — ул. Профсоюзная, 63, Бишкек (Google Maps)"
+                    title={`${t.contactsPage.addressBlockTitle} (Google Maps)`}
                   />
                 </Paper>
                 <Typography
@@ -316,7 +327,7 @@ export default function ContactsPage() {
                     rel="noopener noreferrer"
                     startIcon={<LocationOnIcon />}
                   >
-                    Открыть в 2ГИС
+                    {t.contactsPage.open2gis}
                   </Button>
                 </Box>
               </motion.div>
@@ -340,16 +351,16 @@ export default function ContactsPage() {
                   }}
                 >
                   <Typography variant="h4" fontWeight={600} sx={{ mb: 1 }}>
-                    Напишите нам
+                    {t.contactsPage.formTitle}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-                    Заполните форму, и мы свяжемся с вами в ближайшее время
+                    {t.contactsPage.formDescription}
                   </Typography>
 
                   <Box component="form" noValidate onSubmit={handleSubmit}>
                     <TextField
                       fullWidth
-                      label="Ваше имя"
+                      label={t.contactsPage.formName}
                       variant="outlined"
                       sx={{ mb: 3 }}
                       value={form.name}
@@ -358,26 +369,26 @@ export default function ContactsPage() {
                     />
                     <TextField
                       fullWidth
-                      label="Телефон"
+                      label={t.contactsPage.formPhone}
                       variant="outlined"
                       sx={{ mb: 3 }}
                       value={form.phone}
                       onChange={updateField('phone')}
-                      helperText="Укажите телефон или email (хотя бы одно поле)"
+                      helperText={t.contactsPage.formHelper}
                     />
                     <TextField
                       fullWidth
-                      label="Email"
+                      label={t.contactsPage.formEmail}
                       type="email"
                       variant="outlined"
                       sx={{ mb: 3 }}
                       value={form.email}
                       onChange={updateField('email')}
-                      helperText="Укажите телефон или email (хотя бы одно поле)"
+                      helperText={t.contactsPage.formHelper}
                     />
                     <TextField
                       fullWidth
-                      label="Сообщение"
+                      label={t.contactsPage.formMessage}
                       multiline
                       rows={4}
                       variant="outlined"
@@ -410,10 +421,10 @@ export default function ContactsPage() {
                         {isSubmitting ? (
                           <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1 }}>
                             <CircularProgress size={20} color="inherit" />
-                            Отправка...
+                            {t.contactsPage.formSending}
                           </Box>
                         ) : (
-                          'Отправить сообщение'
+                          t.contactsPage.formSubmit
                         )}
                       </Button>
                     </motion.div>
@@ -435,7 +446,7 @@ export default function ContactsPage() {
           >
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="h3" color="primary.main" sx={{ mb: 3 }}>
-                Как нас найти
+                {t.contactsPage.howToFind}
               </Typography>
               <Paper
                 elevation={0}
@@ -449,14 +460,13 @@ export default function ContactsPage() {
                 <Grid container spacing={4} alignItems="center">
                   <Grid size={{ xs: 12, md: 8 }}>
                     <Typography variant="h5" sx={{ mb: 2 }}>
-                      Фармацевтическая компания ЭрайФарм
+                      {t.contactsPage.addressBlockTitle}
                     </Typography>
-                    <Typography variant="body1" sx={{ opacity: 0.9, lineHeight: 1.8 }}>
-                      Наш офис и складской комплекс расположены по адресу:<br />
-                      <strong>720080, г. Бишкек, ул. Профсоюзная, дом № 63</strong>
+                    <Typography variant="body1" sx={{ opacity: 0.9, lineHeight: 1.8, whiteSpace: 'pre-line' }}>
+                      {t.contactsPage.addressBlockDescription}
                     </Typography>
                     <Typography variant="body2" sx={{ mt: 2, opacity: 0.8 }}>
-                      Мы работаем с понедельника по пятницу с 9:00 до 18:00
+                      {t.contactsPage.addressBlockHours}
                     </Typography>
                   </Grid>
                   <Grid size={{ xs: 12, md: 4 }}>
@@ -474,7 +484,7 @@ export default function ContactsPage() {
                       }}
                       startIcon={<LocationOnIcon />}
                     >
-                      Открыть в 2ГИС
+                      {t.contactsPage.open2gis}
                     </Button>
                   </Grid>
                 </Grid>

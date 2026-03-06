@@ -13,20 +13,23 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { motion } from 'framer-motion';
-
-const navLinks = [
-  { label: 'Главная', href: '/' },
-  { label: 'О нас', href: '/about' },
-  { label: 'Карьера', href: '/career' },
-  { label: 'Галерея', href: '/gallery' },
-  { label: 'Контакты', href: '/contacts' },
-];
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const socialLinks = [
   { icon: InstagramIcon, href: 'https://www.instagram.com/erai_pharm', label: 'Instagram' },
 ];
 
 export default function Footer() {
+  const { t } = useLocale();
+
+  const navLinks = [
+    { label: t.nav.home, href: '/' },
+    { label: t.nav.about, href: '/about' },
+    { label: t.nav.career, href: '/career' },
+    { label: t.nav.gallery, href: '/gallery' },
+    { label: t.nav.contacts, href: '/contacts' },
+  ];
+
   return (
     <Box
       component="footer"
@@ -89,8 +92,7 @@ export default function Footer() {
               transition={{ duration: 0.5 }}
             >
               <Typography variant="body2" sx={{ opacity: 0.8, mb: 3, lineHeight: 1.8 }}>
-                Фармацевтическая компания ЭрайФарм — один из крупнейших
-                фармдистрибьюторов в Кыргызстане с 1999 года.
+                {t.footer.description}
               </Typography>
               <Box sx={{ display: 'flex', gap: 1 }}>
                 {socialLinks.map((social) => (
@@ -125,7 +127,7 @@ export default function Footer() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
-                Навигация
+                {t.footer.navigation}
               </Typography>
               <Box component="nav" sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                 {navLinks.map((link) => (
@@ -166,7 +168,7 @@ export default function Footer() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
-                Контакты
+                {t.footer.contacts}
               </Typography>
               <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
@@ -196,13 +198,12 @@ export default function Footer() {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
-                Адрес
+                {t.footer.address}
               </Typography>
               <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
                 <LocationOnIcon sx={{ fontSize: 20, mt: 0.3, color: 'secondary.light' }} />
                 <Typography variant="body2" sx={{ lineHeight: 1.8 }}>
-                  720080, г. Бишкек,<br />
-                  ул. Профсоюзная, дом № 63
+                  {t.footer.addressText}
                 </Typography>
               </Box>
             </motion.div>
@@ -222,7 +223,7 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ opacity: 0.7 }}>
-            © 2026 ЭрайФарм. Все права защищены.
+            {t.footer.copyright}
           </Typography>
         </Box>
       </Container>

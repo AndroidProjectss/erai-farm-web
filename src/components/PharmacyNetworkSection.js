@@ -5,6 +5,7 @@ import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
 import SchoolIcon from '@mui/icons-material/School';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import { useLocale } from '@/i18n/LocaleProvider';
 
 const pharmacyStats = [
   {
@@ -38,6 +39,8 @@ const pharmacyStats = [
 ];
 
 export default function PharmacyNetworkSection() {
+  const { t } = useLocale();
+
   return (
     <Box
       sx={{
@@ -74,7 +77,7 @@ export default function PharmacyNetworkSection() {
                   fontWeight: 600,
                 }}
               >
-                Розничная сеть
+                {t.pharmacy.overline}
               </Typography>
             </Box>
             
@@ -85,7 +88,7 @@ export default function PharmacyNetworkSection() {
                 mb: 2,
               }}
             >
-              Аптечная сеть ЭрайФарм
+              {t.pharmacy.title}
             </Typography>
             <Typography
               variant="body1"
@@ -95,8 +98,7 @@ export default function PharmacyNetworkSection() {
                 mx: 'auto',
               }}
             >
-              Одна из крупнейших розничных сетей в Кыргызстане с акцентом на качественное 
-              обслуживание клиентов и широкий ассортимент лекарственных средств
+              {t.pharmacy.description}
             </Typography>
           </Box>
         </motion.div>
@@ -172,7 +174,7 @@ export default function PharmacyNetworkSection() {
                       lineHeight: 1.2,
                     }}
                   >
-                    {stat.label}
+                    {t.pharmacy.stats[index].label}
                   </Typography>
                   
                   <Typography
@@ -184,7 +186,7 @@ export default function PharmacyNetworkSection() {
                       minHeight: { sm: 44, md: 48 },
                     }}
                   >
-                    {stat.description}
+                    {t.pharmacy.stats[index].description}
                   </Typography>
                 </Paper>
               </motion.div>
@@ -232,19 +234,10 @@ export default function PharmacyNetworkSection() {
                       mb: 3,
                     }}
                   >
-                    Наши преимущества
+                    {t.pharmacy.advantagesTitle}
                   </Typography>
 
-                  {[
-                    'Широкий ассортимент — более 10 000 SKU',
-                    'Квалифицированные фармацевты',
-                    'Программа лояльности для клиентов',
-                    'Онлайн-заказ с доставкой',
-                    'Консультации специалистов',
-                    'Доступные цены',
-                    'Удобное расположение',
-                    'Современное оборудование',
-                  ].map((advantage, index) => (
+                  {t.pharmacy.advantages.map((advantage, index) => (
                     <motion.div
                       key={advantage}
                       initial={{ opacity: 0, x: 20 }}
