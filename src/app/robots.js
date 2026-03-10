@@ -4,7 +4,7 @@ export default function robots() {
       userAgent: '*',
       allow: '/',
     },
-    host: 'https://erai.kg',
-    sitemap: 'https://erai.kg/sitemap.xml',
+    host: 'https://www.erai.kg',
+    sitemap: 'https://www.erai.kg/sitemap.xml',
   };
 }

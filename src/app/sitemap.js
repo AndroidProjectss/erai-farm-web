@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://erai.kg';
+  const baseUrl = 'https://www.erai.kg';
   const now = new Date();
 
   return [

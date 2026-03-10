@@ -19,6 +19,22 @@ const nextConfig = {
   compress: true,
   // Удаляем X-Powered-By header
   poweredByHeader: false,
+
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'erai.kg',
+          },
+        ],
+        destination: 'https://www.erai.kg/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

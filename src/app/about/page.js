@@ -28,10 +28,14 @@ export async function generateMetadata() {
   return {
     title: seo.title,
     description: seo.description,
+    alternates: {
+      canonical: '/about',
+    },
     openGraph: {
       title: seo.ogTitle,
       description: seo.ogDescription,
       locale: seo.ogLocale,
+      url: '/about',
     },
   };
 }

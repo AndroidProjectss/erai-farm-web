@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://erai.kg'),
+  metadataBase: new URL('https://www.erai.kg'),
   title: {
     default: 'ЭрайФарм (ERAI Pharm) — фармацевтическая компания Кыргызстана',
     template: '%s | ЭрайФарм',
@@ -96,8 +96,8 @@ export default async function RootLayout({ children }) {
     '@type': 'Organization',
     name: 'ЭрайФарм',
     alternateName: 'ERAI Pharm',
-    url: 'https://erai.kg',
-    logo: 'https://erai.kg/logo-sm.png',
+    url: 'https://www.erai.kg',
+    logo: 'https://www.erai.kg/logo-sm.png',
     email: 'eraipharm.corp@erai.kg',
     telephone: '+996312925511',
     address: {
