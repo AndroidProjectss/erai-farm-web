@@ -68,7 +68,7 @@ const features = [
 ];
 
 export default function LogisticsSection() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <Box
@@ -175,7 +175,7 @@ export default function LogisticsSection() {
                       fontSize: { xs: '1.75rem', md: '2.25rem' },
                     }}
                   >
-                    {stat.value}
+                    {index === 3 && locale === 'kg' ? '24 саат' : stat.value}
                   </Typography>
                   <Typography
                     variant="body2"

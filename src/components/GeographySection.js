@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useLocale } from '@/i18n/LocaleProvider';
 
 export default function GeographySection() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <Box
@@ -44,7 +44,7 @@ export default function GeographySection() {
               { value: '7', label: t.geography.labels[0] },
               { value: '3', label: t.geography.labels[1] },
               { value: '145+', label: t.geography.labels[2] },
-              { value: '24ч', label: t.geography.labels[3] },
+              { value: locale === 'kg' ? '24 саат' : '24ч', label: t.geography.labels[3] },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

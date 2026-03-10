@@ -22,7 +22,7 @@ export const translations = {
       pharmacies: 'Аптек в сети',
       retailNetwork: 'Розничная сеть',
       pharmacists: 'Более 300 фармацевтов',
-      target: 'Цель: 200 точек к 2026',
+      target: 'Цель: 200 точек до конца 2026',
     },
     directions: {
       overline: 'Направления деятельности',
@@ -96,7 +96,7 @@ export const translations = {
         },
         {
           label: 'Цель 2026',
-          description: 'Точек продаж к концу года',
+          description: '200 точек до конца 2026',
         },
         {
           label: 'Рост сети',
@@ -433,7 +433,7 @@ export const translations = {
       pharmacies: '145тен ашык дарыкана тармагы',
       retailNetwork: 'Чекене соода тармагы',
       pharmacists: '300дөн ашык фармацевт',
-      target: '2026-жылга чейин 200 дарыкана',
+      target: '2026-жылдын аягына чейин 200 дарыкана',
     },
     directions: {
       overline: 'Ишмердүүлүк багыттары',
@@ -507,7 +507,7 @@ export const translations = {
         },
         {
           label: 'Максатыбыз 2026',
-          description: '2026-жылдын аягына чейин 200 соода түйүнүнө жетүү',
+          description: '2026-жылдын аягына чейин 200 дарыкана',
         },
         {
           label: 'тармактын өсүшү',

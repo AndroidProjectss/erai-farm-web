@@ -26,7 +26,7 @@ const pharmacyStats = [
     icon: TrendingUpIcon,
     value: '200',
     label: 'Цель 2026',
-    description: 'Точек продаж к концу года',
+    description: '200 точек до конца 2026',
     color: '#16348a',
   },
   {
